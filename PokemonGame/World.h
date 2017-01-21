@@ -1,4 +1,7 @@
 #pragma once
+
+#include "Battle.h"
+
 class World
 {
 public:
