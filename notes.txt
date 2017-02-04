@@ -1,0 +1,53 @@
+Gen 1:
+
+Rock Gym: Golem, Onix, Rhyhorn, Omastar, Kabutops, Aerodactyl
+
+Electric Gym: Raichu, Electrode, Magneton, Jolteon, Electrabuzz
+
+Grass Gym: Venosaur, Vileplume, Victreebel, Exeggutor, Scyther, 
+
+Fire Gym:  Rapidash, Flareon, Magmar, Ninetales, Arcanine, Charizard
+
+Ground Gym: Nidoqueen, Nidoking, Dugtrio, Marowak, Sandslash, Rhydon
+
+Psychic Gym: Alakazam, Hypno, Gengar, Mr Mime, Jynx, Slowbro
+
+Poison Gym: Arbok, Weezing, Muk, Tentacruel, Victreebel, Vileplume
+
+Water Gym: Vaporeon, Poliwrath, Dewgong, Cloyster, Kingler, Blastoise
+
+
+Elite 1: Pinsir, Tauros, Magmar, Ditto, Scyther, Electrabuzz
+Elite 2: Magcargo, Ampharos, Octillery, Donphan, Xatu, Shuckle
+Elite 3: Eevee, Flareon, Vaporeon, Jolteon, Umbreon, Espeon
+Elite 4: Venosaur, Blastoise, Charizard, Meganium, Feraligatr, Typhlosion
+
+
+Gen 2:
+
+Flying Gym: Xatu, Gligar, Delibird, Yanma, Pigeot, Noctowl
+
+Bug Gym: Ariados, Heracross, Pinsir, Butterfree, Beedrill, Venomoth
+
+Normal Gym: Clefable, Miltank, Wigglytuff, Persian, Kanghaskhan, Snorlax
+
+Ghost Gym: Gengar, Misdreavus, Umbreon, Murkrow, Sneasel, Houndoom
+
+Fighting Gym: Machamp, Hitmonchan, Hitmonlee, Hitmontop, Primeape, Poliwrath
+
+Steel Gym: Skarmory, Scissor, Steelix, Magneton, Fortress
+
+Ice Gym: Dewgong, Cloyster, Lapras, Glalie, Piloswine, Walrein
+
+Dragon Gym: Dragonite, Kingdra, Gyrados
+
+Elite 1: Regirock, Armaldo, Cradily, Tyranitar, Relicanth, Nosepass
+Elite 2: Dewgong, Cloyster, Kingler, Lapras, Glalie, Regice
+Elite 3: Skarmory, Scissor, Steelix, Registeel, Aggron, Metagross
+Elite 4: Zangoose, Exploud, Snorlax, Ursaring, Slaking, Regigigas
+
+
+
+
+
+

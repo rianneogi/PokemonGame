@@ -1,22 +1,21 @@
-#include "Timer.h"
-#include "LuaFunctions.h"
+#include "BattleRenderer.h"
 
-SDL_Window* gWindow = NULL;
+BattleRenderer* mRenderer = NULL;
 const unsigned int MAX_FPS = 30;
 
 void handleEvent(SDL_Event e, Uint32 deltatime)
 {
-
+	mRenderer->handleEvent(e);
 }
 
 void update(Uint32 deltatime)
 {
-
+	mRenderer->update(deltatime);
 }
 
 void render()
 {
-
+	mRenderer->render(gWindow);
 }
 
 void mainLoop()
@@ -79,11 +78,35 @@ void mainLoop()
 	}
 }
 
+void init()
+{
+	int imgFlags = IMG_INIT_PNG;
+	if (!(IMG_Init(imgFlags) & imgFlags))
+	{
+		printf("SDL_image could not initialize! SDL_image Error: %s\n", IMG_GetError());
+	}
+
+	gWindow = SDL_CreateWindow("Pokemon", 0, 0, 800, 600, SDL_WINDOW_SHOWN);
+	gScreenSurface = SDL_GetWindowSurface(gWindow);
+}
+
+void cleanup()
+{
+	delete mRenderer;
+	delete gWindow;
+}
+
 int main(int argc, char* args[])
 {
-	gWindow = SDL_CreateWindow("Pokemon", 0, 0, 800, 600, SDL_WINDOW_SHOWN);
+	init();
+
+	Battle* b = new Battle();
+	mRenderer = new BattleRenderer(b);
 
 	mainLoop();
+
+	cleanup();
+	delete b;
 
 	return 0;
 }

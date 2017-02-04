@@ -1,5 +1,5 @@
 #include "LuaFunctions.h"
 
-void registerLua(lua_State * L)
+void registerLua(lua_State* L)
 {
 }
