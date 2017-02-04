@@ -7,9 +7,9 @@ class BattleRenderer
 {
 public:
 	Battle* mBattle;
-	SDL_Surface* mBackgroundSprite;
-	SDL_Surface* mPokemonFrontSprite;
-	SDL_Surface* mPokemonBackSprite;
+	Texture* mBackgroundSprite;
+	Texture* mPokemonFrontSprite;
+	Texture* mPokemonBackSprite;
 
 	BattleRenderer();
 	BattleRenderer(Battle* battle);

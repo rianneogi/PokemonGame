@@ -56,20 +56,20 @@ void mainLoop()
 		//gTimer.restart();
 
 		//Clear screen
-		//SDL_RenderClear(gRenderer);
+		SDL_RenderClear(gRenderer);
 
 		//Render texture to screen
-		//render();
+		render();
 		//SDL_RenderCopy(gRenderer, gTexture, NULL, NULL);
 
 		//Update screen
-		//SDL_RenderPresent(gRenderer);
+		SDL_RenderPresent(gRenderer);
 
 		//// draw...
-		render();
+		//render();
 
 		//// end the current frame (internally swaps the front and back buffers)
-		SDL_UpdateWindowSurface(gWindow);
+		//SDL_UpdateWindowSurface(gWindow);
 	
 		//SDL_GL_SwapWindow(gWindow);
 

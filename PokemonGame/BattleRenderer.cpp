@@ -7,14 +7,17 @@ BattleRenderer::BattleRenderer() : mBattle(NULL)
 
 BattleRenderer::BattleRenderer(Battle* battle) : mBattle(battle)
 {
-	mBackgroundSprite = loadSurface("Game Data/Sprites/Platinum/Battle-Backgrounds.png");
+	mBackgroundSprite = new Texture("Game Data/Sprites/Platinum/Battle-Backgrounds.png");
 	//mPokemonFrontSprite = loadSurface("Game Data/Sprites/Emerald/Generation-1-Pokemon.png");
-	mPokemonFrontSprite = loadSurface("Game Data/Sprites/HeartGoldSoulSilver/Pokemon-Fronts-(Male).png");
-	mPokemonBackSprite = loadSurface("Game Data/Sprites/Emerald/Generation-1-Pokemon.png");
+	mPokemonFrontSprite = new Texture("Game Data/Sprites/HeartGoldSoulSilver/Pokemon-Fronts-(Male).png");
+	mPokemonBackSprite = new Texture("Game Data/Sprites/Emerald/Generation-1-Pokemon.png");
 }
 
 BattleRenderer::~BattleRenderer()
 {
+	delete mBackgroundSprite;
+	delete mPokemonBackSprite;
+	delete mPokemonFrontSprite;
 }
 
 void BattleRenderer::render(SDL_Surface* surface)
@@ -24,8 +27,8 @@ void BattleRenderer::render(SDL_Surface* surface)
 	r.y = 1;
 	r.w = 256;
 	r.h = 144;
-	SDL_BlitSurface(mBackgroundSprite, &r, surface, NULL);
-	//mBackgroundSprite.render(surface, 0, 0, &r);
+	//SDL_BlitSurface(mBackgroundSprite->mTexture, &r, surface, NULL);
+	mBackgroundSprite->render(0, 0, &r);
 
 	SDL_Rect r2;
 	r2.x = 6;
@@ -38,8 +41,8 @@ void BattleRenderer::render(SDL_Surface* surface)
 	r3.y = 30;
 	r2.w = 62;
 	r2.h = 62;
-	SDL_BlitSurface(mPokemonFrontSprite, &r2, surface, &r3);
-	//mPokemonFrontSprite.render(surface, 160, 30, &r2);
+	//SDL_BlitSurface(mPokemonFrontSprite->mTexture, &r2, surface, &r3);
+	mPokemonFrontSprite->render(160, 30, &r2);
 }
 
 void BattleRenderer::update(Uint32 deltatime)

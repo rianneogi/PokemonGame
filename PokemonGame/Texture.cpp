@@ -1,10 +1,10 @@
 #include "Texture.h"
 
-Texture::Texture() : mTexture(NULL)
+Texture::Texture() : mTexture(NULL), mWidth(900), mHeight(900)
 {
 }
 
-Texture::Texture(std::string path) : mTexture(NULL)
+Texture::Texture(std::string path) : mTexture(NULL), mWidth(900), mHeight(900)
 {
 	loadFromFile(path);
 }
@@ -14,10 +14,10 @@ Texture::~Texture()
 	free();
 }
 
-bool Texture::loadFromFile(std::string path)
+void Texture::loadFromFile(std::string path)
 {
-	//The final optimized image
-	SDL_Surface* optimizedSurface = NULL;
+	//The final texture
+	SDL_Texture* newTexture = NULL;
 
 	//Load image at specified path
 	SDL_Surface* loadedSurface = IMG_Load(path.c_str());
@@ -27,23 +27,21 @@ bool Texture::loadFromFile(std::string path)
 	}
 	else
 	{
-		//Convert surface to screen format
-		mTexture = SDL_ConvertSurface(loadedSurface, gScreenSurface->format, NULL);
+		//Create texture from surface pixels
+		mTexture = SDL_CreateTextureFromSurface(gRenderer, loadedSurface);
 		if (mTexture == NULL)
 		{
-			printf("Unable to optimize image %s! SDL Error: %s\n", path.c_str(), SDL_GetError());
+			printf("Unable to create texture from %s! SDL Error: %s\n", path.c_str(), SDL_GetError());
 		}
 
 		//Get rid of old loaded surface
 		SDL_FreeSurface(loadedSurface);
 	}
-
-	return true;
 }
 
 void Texture::free()
 {
-	SDL_FreeSurface(mTexture);
+	SDL_DestroyTexture(mTexture);
 	mTexture = NULL;
 }
 
@@ -61,10 +59,10 @@ void Texture::setAlpha(Uint8 alpha)
 	//SDL_SetTextureAlphaMod(mTexture, alpha);
 }
 
-void Texture::render(SDL_Surface* surface, int x, int y, SDL_Rect * clip)
+void Texture::render(int x, int y, SDL_Rect * clip)
 {
 	//Set rendering space and render to screen
-	SDL_Rect renderQuad = { x, y, 900, 900 };
+	SDL_Rect renderQuad = { x, y, mWidth, mHeight };
 
 	//Set clip rendering dimensions
 	if (clip != NULL)
@@ -73,6 +71,6 @@ void Texture::render(SDL_Surface* surface, int x, int y, SDL_Rect * clip)
 		renderQuad.h = clip->h;
 	}
 
-	SDL_BlitSurface(mTexture, clip, surface, &renderQuad);
-	//SDL_RenderCopy(gRenderer, mTexture, clip, &renderQuad);
+	//SDL_BlitSurface(mTexture, clip, surface, &renderQuad);
+	SDL_RenderCopy(gRenderer, mTexture, clip, &renderQuad);
 }
