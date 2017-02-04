@@ -15,7 +15,7 @@ void update(Uint32 deltatime)
 
 void render()
 {
-	mRenderer->render(gWindow);
+	mRenderer->render(gScreenSurface);
 }
 
 void mainLoop()
@@ -55,10 +55,20 @@ void mainLoop()
 		update(deltaTime);
 		//gTimer.restart();
 
-		// draw...
+		//Clear screen
+		//SDL_RenderClear(gRenderer);
+
+		//Render texture to screen
+		//render();
+		//SDL_RenderCopy(gRenderer, gTexture, NULL, NULL);
+
+		//Update screen
+		//SDL_RenderPresent(gRenderer);
+
+		//// draw...
 		render();
 
-		// end the current frame (internally swaps the front and back buffers)
+		//// end the current frame (internally swaps the front and back buffers)
 		SDL_UpdateWindowSurface(gWindow);
 	
 		//SDL_GL_SwapWindow(gWindow);
@@ -80,20 +90,33 @@ void mainLoop()
 
 void init()
 {
+	gWindow = SDL_CreateWindow("Pokemon", 0, 0, 800, 600, SDL_WINDOW_SHOWN);
+	gScreenSurface = SDL_GetWindowSurface(gWindow);
+
 	int imgFlags = IMG_INIT_PNG;
 	if (!(IMG_Init(imgFlags) & imgFlags))
 	{
 		printf("SDL_image could not initialize! SDL_image Error: %s\n", IMG_GetError());
 	}
 
-	gWindow = SDL_CreateWindow("Pokemon", 0, 0, 800, 600, SDL_WINDOW_SHOWN);
-	gScreenSurface = SDL_GetWindowSurface(gWindow);
+	gRenderer = SDL_CreateRenderer(gWindow, -1, SDL_RENDERER_ACCELERATED);
+	if (gRenderer == NULL)
+	{
+		printf("Renderer could not be created! SDL Error: %s\n", SDL_GetError());
+	}
+	else
+	{
+		//Initialize renderer color
+		SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
+	}
 }
 
 void cleanup()
 {
-	delete mRenderer;
-	delete gWindow;
+	SDL_DestroyRenderer(gRenderer);
+	SDL_DestroyWindow(gWindow);
+	gRenderer = NULL;
+	gWindow = NULL;
 }
 
 int main(int argc, char* args[])
