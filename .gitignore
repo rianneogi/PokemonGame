@@ -265,6 +265,18 @@ __pycache__/
 /PokemonGame/PokemonGame.vcxproj
 /PokemonGame/PokemonGame.vcxproj.filters
 /PokemonGame/PokemonGame.vcxproj
+
+
+/PokemonGame/MyPokemonGame.vcxproj
+/PokemonGame/MyPokemonGame.vcxproj.filters
+/PokemonGame/MyPokemonGame.vcxproj
+/PokemonGame/MyPokemonGame.vcxproj.filters
+
 /PokemonGame/PokemonGame.vcxproj.filters
 /PokemonGame/Graphics
 /PokemonGame/Game Data
+
+*.dll
+/Lua/*
+/SDL2-2.0.5/*
+/SDL2_image-2.0.1

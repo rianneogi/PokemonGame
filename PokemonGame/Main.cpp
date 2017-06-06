@@ -1,21 +1,22 @@
-#include "BattleRenderer.h"
+#include "WorldRenderer.h"
 
-BattleRenderer* mRenderer = NULL;
+BattleRenderer* mBattleRenderer = NULL;
+WorldRenderer* mWorldRenderer = NULL;
 const unsigned int MAX_FPS = 30;
 
 void handleEvent(SDL_Event e, Uint32 deltatime)
 {
-	mRenderer->handleEvent(e);
+	mWorldRenderer->handleEvent(e);
 }
 
 void update(Uint32 deltatime)
 {
-	mRenderer->update(deltatime);
+	mWorldRenderer->update(deltatime);
 }
 
 void render()
 {
-	mRenderer->render(gScreenSurface);
+	mWorldRenderer->render(gScreenSurface);
 }
 
 void mainLoop()
@@ -123,13 +124,17 @@ int main(int argc, char* args[])
 {
 	init();
 
-	Battle* b = new Battle();
-	mRenderer = new BattleRenderer(b);
+	//Battle* b = new Battle();
+	//mBattleRenderer = new BattleRenderer(b);
+
+	World* w = new World();
+	mWorldRenderer = new WorldRenderer(w);
 
 	mainLoop();
 
 	cleanup();
-	delete b;
+	//delete b;
+	delete w;
 
 	return 0;
 }
