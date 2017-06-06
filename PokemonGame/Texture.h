@@ -11,9 +11,11 @@ public:
 
 	Texture();
 	Texture(std::string path);
+	Texture(std::string path, Uint32 r, Uint32 g, Uint32 b);
 	~Texture();
 
 	void loadFromFile(std::string path);
+	void loadFromFile(std::string path, Uint32 r, Uint32 g, Uint32 b);
 	void free();
 
 	void setColor(Uint8 red, Uint8 green, Uint8 blue);

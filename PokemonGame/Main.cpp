@@ -6,17 +6,17 @@ const unsigned int MAX_FPS = 30;
 
 void handleEvent(SDL_Event e, Uint32 deltatime)
 {
-	mWorldRenderer->handleEvent(e);
+	mBattleRenderer->handleEvent(e);
 }
 
 void update(Uint32 deltatime)
 {
-	mWorldRenderer->update(deltatime);
+	mBattleRenderer->update(deltatime);
 }
 
 void render()
 {
-	mWorldRenderer->render(gScreenSurface);
+	mBattleRenderer->render(gScreenSurface);
 }
 
 void mainLoop()
@@ -116,16 +116,20 @@ void cleanup()
 {
 	SDL_DestroyRenderer(gRenderer);
 	SDL_DestroyWindow(gWindow);
+
 	gRenderer = NULL;
 	gWindow = NULL;
+
+	delete mBattleRenderer;
+	delete mWorldRenderer;
 }
 
 int main(int argc, char* args[])
 {
 	init();
 
-	//Battle* b = new Battle();
-	//mBattleRenderer = new BattleRenderer(b);
+	Battle* b = new Battle();
+	mBattleRenderer = new BattleRenderer(b);
 
 	World* w = new World();
 	mWorldRenderer = new WorldRenderer(w);
@@ -133,7 +137,8 @@ int main(int argc, char* args[])
 	mainLoop();
 
 	cleanup();
-	//delete b;
+
+	delete b;
 	delete w;
 
 	return 0;

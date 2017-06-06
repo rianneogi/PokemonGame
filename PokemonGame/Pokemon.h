@@ -7,6 +7,10 @@
 class Pokemon
 {
 public:
+	int mSpecies;
+
+	std::string mName;
+
 	int mLevel;
 
 	int mLife;
