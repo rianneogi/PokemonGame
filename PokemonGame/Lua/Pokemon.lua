@@ -37,12 +37,9 @@ Pokemon["Bulbasaur"] = {
     SpeedGain = 1,
 
     Abilities = {
-        {Tackle, 1},
-        {Growl, 3},
-        {Vine Whip, 7},
-        {Poison Power, 13},
-        {Sleep Power, 13},
-        {Takedown, 15},
-        {Razor Leaf, 19}
+        {"Tackle", 1},
+        {"Razor Leaf", 1},
+		{"Vine Whip", 1},
+		{"Leech Seed", 1}
     }
 }
