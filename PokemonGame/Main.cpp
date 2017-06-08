@@ -108,7 +108,7 @@ void init()
 	else
 	{
 		//Initialize renderer color
-		SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
+		SDL_SetRenderDrawColor(gRenderer, 0x0, 0x0, 0x0, 0xFF);
 	}
 }
 

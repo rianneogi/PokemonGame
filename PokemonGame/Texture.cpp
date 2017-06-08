@@ -21,9 +21,6 @@ Texture::~Texture()
 
 void Texture::loadFromFile(std::string path)
 {
-	//The final texture
-	SDL_Texture* newTexture = NULL;
-
 	//Load image at specified path
 	SDL_Surface* loadedSurface = IMG_Load(path.c_str());
 	if (loadedSurface == NULL)
@@ -55,7 +52,7 @@ void Texture::loadFromFile(std::string path, Uint32 r, Uint32 g, Uint32 b)
 	else
 	{
 		SDL_SetColorKey(loadedSurface, SDL_TRUE, SDL_MapRGB(loadedSurface->format, r, g, b));
-
+		
 		//Create texture from surface pixels
 		mTexture = SDL_CreateTextureFromSurface(gRenderer, loadedSurface);
 		if (mTexture == NULL)
@@ -80,15 +77,15 @@ void Texture::setColor(Uint8 red, Uint8 green, Uint8 blue)
 
 void Texture::setBlendMode(SDL_BlendMode blending)
 {
-	//SDL_SetTextureBlendMode(mTexture, blending);
+	SDL_SetTextureBlendMode(mTexture, blending);
 }
 
 void Texture::setAlpha(Uint8 alpha)
 {
-	//SDL_SetTextureAlphaMod(mTexture, alpha);
+	SDL_SetTextureAlphaMod(mTexture, alpha);
 }
 
-void Texture::render(int x, int y, SDL_Rect * clip)
+void Texture::render(int x, int y, SDL_Rect* clip)
 {
 	//Set rendering space and render to screen
 	SDL_Rect renderQuad = { x, y, mWidth, mHeight };

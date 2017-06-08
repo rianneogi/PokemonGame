@@ -10,6 +10,7 @@ BattleRenderer::BattleRenderer(Battle* battle) : mBattle(battle)
 	mBackgroundSprite = new Texture("Game Data/Sprites/Platinum/Battle-Backgrounds.png");
 	mPokemonFrontSprite = new Texture("Game Data/Sprites/RubySapphire/Gen.-1-Pokemon.png", 255, 200, 106);
 	mPokemonBackSprite = new Texture("Game Data/Sprites/RubySapphire/Gen.-1-Pokemon.png", 255, 200, 106);
+	mMenuSprite = new Texture("Game Data/Sprites/RubySapphire/Fonts-and-Menus.png", 255, 255, 255);
 }
 
 BattleRenderer::~BattleRenderer()
@@ -42,6 +43,13 @@ void BattleRenderer::render(SDL_Surface* surface)
 	mPokemonFrontSprite->render(160, 40, &r2);
 
 	mPokemonBackSprite->render(40, 82, &r3);
+
+	SDL_Rect r4;
+	r4.x = 11;
+	r4.y = 500;
+	r4.w = 235;
+	r4.h = 40;
+	mMenuSprite->render(0, 145, &r4);
 }
 
 void BattleRenderer::update(Uint32 deltatime)

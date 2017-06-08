@@ -10,6 +10,7 @@ public:
 	Texture* mBackgroundSprite;
 	Texture* mPokemonFrontSprite;
 	Texture* mPokemonBackSprite;
+	Texture* mMenuSprite;
 
 	BattleRenderer();
 	BattleRenderer(Battle* battle);
