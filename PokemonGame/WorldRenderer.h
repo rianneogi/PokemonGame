@@ -1,6 +1,7 @@
 #pragma once
 
 #include "BattleRenderer.h"
+#include "Vector2.h"
 
 class WorldRenderer
 {

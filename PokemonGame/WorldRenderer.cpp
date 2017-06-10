@@ -9,21 +9,62 @@ WorldRenderer::~WorldRenderer()
 {
 }
 
+
+
 void WorldRenderer::render(SDL_Surface* surface)
 {
 	SDL_Rect r;
-	for (int i = 0; i < 64; i++)
-	{
-		for (int j = 0; j < 64; j++)
-		{
-			r.x = 32*i;
-			r.y = 32*j;
-			r.w = 32;
-			r.h = 32;
-			mTerrainTexture->render(0, 0, &r);
-		}
-	}
-	
+    r.x = 32;
+    r.y = 32;
+    r.w = 32;
+    r.h = 32;
+
+
+    
+    const int SEED = 3;
+    const int ROWS = 10;
+    const int COLS = 10;
+    const int CELL_SIZE = 10;
+
+
+    srand(SEED);
+
+    const int PIXEL_ROWS = ROWS * CELL_SIZE;
+    const int PIXEL_COLS = COLS * CELL_SIZE;
+
+    Vector2 lattice[ROWS][COLS];
+    float radius;
+    float angle;
+
+    float pixels[PIXEL_ROWS][PIXEL_COLS];
+
+    Vector2 tempVector;
+    for (int latticeRow = 0; latticeRow < ROWS; latticeRow++) {
+        for (int latticeCol = 0; latticeCol < COLS; latticeCol++) {
+			tempVector.x = getRand();
+			tempVector.y = getRand();
+            tempVector.normalize();
+            lattice[latticeRow][latticeCol] = tempVector;
+        }
+    }
+
+
+	int lx;
+	int ly;
+    for (int pixelRow = 0; pixelRow < PIXEL_ROWS; pixelRow++) {
+        for (int pixelCol = 0; pixelCol < PIXEL_COLS; pixelCol++) {
+            lx = pixelRow / ROWS;
+            ly = pixelCol / COLS;
+            // pixels[pixelRow][pixelCol]
+        }
+    }
+
+}
+
+float getRand() {
+    int x = rand();
+    float ret = (float) (x % 100);
+    return ret;
 }
 
 void WorldRenderer::update(Uint32 deltatime)
