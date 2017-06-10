@@ -4,6 +4,8 @@
 
 enum TargetType { TARGET_NONE, TARGET_UNIT, TARGET_GROUND, TARGET_NUM };
 
+void registerLua(lua_State* L);
+
 class AbilityData
 {
 public:
@@ -13,10 +15,10 @@ public:
 	int TargetType;
 	std::string Description;
 
-	AbilityData();
-	~AbilityData();
+	AbilityData() {}
+	~AbilityData() {}
 };
 
-void initAbilities();
+int initAbilities();
 
 extern std::vector<AbilityData> AbilityDatabase;

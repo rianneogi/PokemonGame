@@ -2,6 +2,8 @@
 
 #include "AbilityData.h"
 
+extern lua_State* LuaPokemon;
+
 enum Stat { STAT_LIFE, STAT_ATK, STAT_DEF, STAT_SPATK, STAT_SPDEF, STAT_SPEED, STAT_NUM };
 
 enum Type {TYPE_NORMAL, TYPE_FIGHTING, TYPE_FLYING, TYPE_POISON, TYPE_GROUND, TYPE_ROCK, TYPE_BUG, TYPE_GHOST, TYPE_STEEL, TYPE_FIRE,
@@ -18,11 +20,11 @@ public:
 	int BaseStats[STAT_NUM];
 	int StatGains[STAT_NUM];
 
-	PokemonData();
-	~PokemonData();
+	PokemonData() {}
+	~PokemonData() {}
 };
 
-void initPokemon();
+int initPokemon();
 
 extern std::vector<PokemonData> PokemonDatabase;
 

@@ -110,6 +110,8 @@ void init()
 		//Initialize renderer color
 		SDL_SetRenderDrawColor(gRenderer, 0x0, 0x0, 0x0, 0xFF);
 	}
+
+	initPokemon();
 }
 
 void cleanup()

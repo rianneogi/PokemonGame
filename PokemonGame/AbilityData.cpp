@@ -2,6 +2,6 @@
 
 std::vector<AbilityData> AbilityDatabase;
 
-void initAbilities()
+int initAbilities()
 {
 }

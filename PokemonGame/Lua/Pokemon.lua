@@ -17,10 +17,12 @@ TYPE_DRAGON = 15
 TYPE_DARK = 16
 TYPE_FAIRY = 17
 
-Pokemon["Bulbasaur"] = {
-    ID = 1
+Pokemon = {}
 
-    Types = {TYPE_GRASS, TYPE_POISON}
+Pokemon["1"] = {
+    Name = "Bulbasaur",
+
+    Types = {TYPE_GRASS, TYPE_POISON},
 
     BaseHP = 45,
     BaseAttack = 49,

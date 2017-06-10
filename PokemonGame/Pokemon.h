@@ -2,8 +2,6 @@
 
 #include "Ability.h"
 
-extern lua_State* LuaPokemon;
-
 enum Facing { FACING_UP, FACING_DOWN, FACING_LEFT, FACING_RIGHT };
 
 class Pokemon
