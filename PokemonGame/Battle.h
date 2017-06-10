@@ -1,12 +1,14 @@
 #pragma once
 
-#include "Pokemon.h"
+#include "Trainer.h"
 
 class Battle
 {
 public:
+	Trainer* mTrainers[2];
+
 	unsigned int mSelf;
-	unsigned int mOpponent;
+	unsigned int mTarget;
 
 	std::vector<Pokemon*> mPokemon;
 
@@ -17,7 +19,13 @@ public:
 	std::vector<unsigned int> mPlayer1InBattle;
 	std::vector<unsigned int> mPlayer2InBattle;
 
-	Battle();
+	int* mTiles;
+
+	Battle(Trainer* t1, Trainer* t2);
 	~Battle();
+
+
+	Pokemon* getPokemon(int trainer, int num);
+	int& getTile(int i, int j);
 };
 

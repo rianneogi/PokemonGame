@@ -26,7 +26,7 @@ public:
 	std::vector<Ability> mAbilities;
 	std::vector<StatusEffect> mStatusEffects;
 
-	Pokemon();
+	Pokemon(int species, int lvl);
 	~Pokemon();
 };
 
