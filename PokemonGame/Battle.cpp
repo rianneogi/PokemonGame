@@ -12,6 +12,19 @@ Battle::Battle(Trainer* t1, Trainer* t2)
 	}
 	mTrainers[0] = t1;
 	mTrainers[1] = t2;
+
+	for (int i = 0; i < t1->mPokemon.size(); i++)
+	{
+		t1->mPokemon[i]->mFacing = FACING_DOWN;
+		t1->mPokemon[i]->mX = 1 + i * 2;
+		t1->mPokemon[i]->mY = 1;
+	}
+	for (int i = 0; i < t2->mPokemon.size(); i++)
+	{
+		t2->mPokemon[i]->mFacing = FACING_UP;
+		t2->mPokemon[i]->mX = 1 + i * 2;
+		t2->mPokemon[i]->mY = 11;
+	}
 }
 
 Battle::~Battle()

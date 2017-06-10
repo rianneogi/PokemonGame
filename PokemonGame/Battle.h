@@ -2,6 +2,8 @@
 
 #include "Trainer.h"
 
+enum Tile { TILE_GRASS, TILE_};
+
 class Battle
 {
 public:

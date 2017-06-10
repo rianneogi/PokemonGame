@@ -12,6 +12,10 @@ public:
 	Texture* mPokemonBackSprite;
 	Texture* mMenuSprite;
 
+	Texture* mTilesetTexture;
+
+	Texture* mPokemonOverworld;
+
 	BattleRenderer();
 	BattleRenderer(Battle* battle);
 	~BattleRenderer();

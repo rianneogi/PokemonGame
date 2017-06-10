@@ -4,6 +4,8 @@
 
 #include "Ability.h"
 
+enum Facing { FACING_UP, FACING_DOWN, FACING_LEFT, FACING_RIGHT };
+
 class Pokemon
 {
 public:
@@ -22,6 +24,10 @@ public:
 
 	int mAccuracy;
 	int mEvasion;
+
+	int mX;
+	int mY;
+	int mFacing;
 
 	std::vector<Ability> mAbilities;
 	std::vector<StatusEffect> mStatusEffects;

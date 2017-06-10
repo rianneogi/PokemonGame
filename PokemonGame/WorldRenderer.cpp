@@ -9,7 +9,11 @@ WorldRenderer::~WorldRenderer()
 {
 }
 
-
+float getRand() {
+	int x = rand();
+	float ret = (float)(x % 100);
+	return ret;
+}
 
 void WorldRenderer::render(SDL_Surface* surface)
 {
@@ -59,12 +63,6 @@ void WorldRenderer::render(SDL_Surface* surface)
         }
     }
 
-}
-
-float getRand() {
-    int x = rand();
-    float ret = (float) (x % 100);
-    return ret;
 }
 
 void WorldRenderer::update(Uint32 deltatime)

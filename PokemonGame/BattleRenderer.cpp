@@ -11,6 +11,8 @@ BattleRenderer::BattleRenderer(Battle* battle) : mBattle(battle)
 	mPokemonFrontSprite = new Texture("Game Data/Sprites/RubySapphire/Gen.-1-Pokemon.png", 255, 200, 106);
 	mPokemonBackSprite = new Texture("Game Data/Sprites/RubySapphire/Gen.-1-Pokemon.png", 255, 200, 106);
 	mMenuSprite = new Texture("Game Data/Sprites/RubySapphire/Fonts-and-Menus.png", 255, 255, 255);
+	mTilesetTexture = new Texture("Graphics/Tilesets/Outside_A2.png");
+	mPokemonOverworld = new Texture("Game Data/Sprites/HeartGoldSoulSilver/Kanto-Pokemon.png");
 }
 
 BattleRenderer::~BattleRenderer()
@@ -23,33 +25,44 @@ BattleRenderer::~BattleRenderer()
 void BattleRenderer::render(SDL_Surface* surface)
 {
 	SDL_Rect r;
-	r.x = 1;
-	r.y = 1;
-	r.w = 256;
-	r.h = 144;
-	mBackgroundSprite->render(0, 0, &r);
+	r.x = 0;
+	r.y = 0;
+	r.w = 32;
+	r.h = 32;
+	for (int i = 0; i < 13; i++)
+	{
+		for (int j = 0; j < 13; j++)
+		{
+			mTilesetTexture->render(i * 32, j * 32, &r);
+		}
+	}
 
-	SDL_Rect r2;
-	r2.x = 8;
-	r2.y = 24;
-	r2.w = 62;
-	r2.h = 62;
+	for (int i = 0; i < 2; i++)
+	{
+		for (int j = 0; j < mBattle->mTrainers[i]->mPokemon.size(); j++)
+		{
+			Pokemon* p = mBattle->mTrainers[i]->mPokemon[j];
 
-	SDL_Rect r3;
-	r3.x = 152;
-	r3.y = 24;
-	r3.w = 62;
-	r3.h = 62;
-	mPokemonFrontSprite->render(160, 40, &r2);
+			r.x = ((p->mSpecies - 1) % 15) * 65;
+			r.y = ((p->mSpecies - 1) / 15) * 129;
 
-	mPokemonBackSprite->render(40, 82, &r3);
+			if (p->mFacing == FACING_LEFT)
+			{
+				r.x += 32;
+			}
+			if (p->mFacing == FACING_DOWN)
+			{
+				r.y += 64;
+			}
+			if (p->mFacing == FACING_RIGHT)
+			{
+				r.x += 32;
+				r.y += 64;
+			}
 
-	SDL_Rect r4;
-	r4.x = 11;
-	r4.y = 500;
-	r4.w = 235;
-	r4.h = 40;
-	mMenuSprite->render(0, 145, &r4);
+			mPokemonOverworld->render(32 * p->mX, 32 * p->mY, &r);
+		}
+	}
 }
 
 void BattleRenderer::update(Uint32 deltatime)
