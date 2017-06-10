@@ -1,8 +1,8 @@
 #pragma once
 
-#include <vector>
-
 #include "Ability.h"
+
+extern lua_State* LuaPokemon;
 
 enum Facing { FACING_UP, FACING_DOWN, FACING_LEFT, FACING_RIGHT };
 
@@ -21,6 +21,13 @@ public:
 	int mDefense;
 	int mSpecialDefense;
 	int mSpeed;
+
+	int mLifePerLvl;
+	int mAttackPerLvl;
+	int mSpecialAttackPerLvl;
+	int mDefensePerLvl;
+	int mSpecialDefensePerLvl;
+	int mSpeedPerLvl;
 
 	int mAccuracy;
 	int mEvasion;

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Include.h"
+#include "PokemonData.h"
 
 class StatusEffect
 {
