@@ -3,8 +3,8 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <Point.h>
-#include <Vector2.h>
+#include "Point.h"
+#include "Vector2.h"
 
 class PerlinNoise
 {

@@ -26,8 +26,7 @@ int initPokemon()
 	{
 		PokemonData d;
 
-		lua_pushinteger(LuaPokemon, i + 1);
-		lua_gettable(LuaPokemon, -2);
+		lua_getfield(LuaPokemon, -1, "1");
 
 		lua_getfield(LuaPokemon, -1, "Name");
 		d.Name = lua_tostring(LuaPokemon, -1);
