@@ -91,7 +91,7 @@ void mainLoop()
 
 void init()
 {
-	gWindow = SDL_CreateWindow("Pokemon", 0, 0, 800, 600, SDL_WINDOW_SHOWN);
+	gWindow = SDL_CreateWindow("Pokemon", 100, 100, 800, 600, SDL_WINDOW_SHOWN);
 	gScreenSurface = SDL_GetWindowSurface(gWindow);
 
 	int imgFlags = IMG_INIT_PNG;
@@ -110,6 +110,8 @@ void init()
 		//Initialize renderer color
 		SDL_SetRenderDrawColor(gRenderer, 0x0, 0x0, 0x0, 0xFF);
 	}
+
+	initPokemon();
 }
 
 void cleanup()
@@ -126,24 +128,37 @@ void cleanup()
 
 int main(int argc, char* args[])
 {
-    printf("Hello, World!");
+	init();
+
+	Trainer* t1 = new Trainer(0);
+	Trainer* t2 = new Trainer(1);
+
+	t1->mPokemon.push_back(new Pokemon(1, 5));
+	t1->mPokemon.push_back(new Pokemon(2, 5));
+	t1->mPokemon.push_back(new Pokemon(3, 5));
+	t1->mPokemon.push_back(new Pokemon(4, 5));
+	t1->mPokemon.push_back(new Pokemon(5, 5));
+	t1->mPokemon.push_back(new Pokemon(6, 5));
+
+	t2->mPokemon.push_back(new Pokemon(7, 5));
+	t2->mPokemon.push_back(new Pokemon(8, 5));
+	t2->mPokemon.push_back(new Pokemon(9, 5));
+	t2->mPokemon.push_back(new Pokemon(10, 5));
+	t2->mPokemon.push_back(new Pokemon(11, 5));
+	t2->mPokemon.push_back(new Pokemon(12, 5));
+
+	Battle* b = new Battle(t1, t2);
+	mBattleRenderer = new BattleRenderer(b);
+
+	World* w = new World();
+	mWorldRenderer = new WorldRenderer(w);
+
+	mainLoop();
+
+	cleanup();
+
+	delete b;
+	delete w;
+
 	return 0;
-    // Main Code {{{
-    // init();
-    //
-    // Battle* b = new Battle();
-    // mBattleRenderer = new BattleRenderer(b);
-    //
-    // World* w = new World();
-    // mWorldRenderer = new WorldRenderer(w);
-    //
-    // mainLoop();
-    //
-    // cleanup();
-    //
-    // delete b;
-    // delete w;
-    //
-    // return 0;
-    // }}}
 }

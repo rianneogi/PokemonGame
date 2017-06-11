@@ -1,8 +1,8 @@
 #pragma once
 
-#include <vector>
-
 #include "Ability.h"
+
+enum Facing { FACING_UP, FACING_DOWN, FACING_LEFT, FACING_RIGHT };
 
 class Pokemon
 {
@@ -20,13 +20,24 @@ public:
 	int mSpecialDefense;
 	int mSpeed;
 
+	int mLifePerLvl;
+	int mAttackPerLvl;
+	int mSpecialAttackPerLvl;
+	int mDefensePerLvl;
+	int mSpecialDefensePerLvl;
+	int mSpeedPerLvl;
+
 	int mAccuracy;
 	int mEvasion;
+
+	int mX;
+	int mY;
+	int mFacing;
 
 	std::vector<Ability> mAbilities;
 	std::vector<StatusEffect> mStatusEffects;
 
-	Pokemon();
+	Pokemon(int species, int lvl);
 	~Pokemon();
 };
 

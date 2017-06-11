@@ -2,6 +2,9 @@
 
 #include <iostream>
 #include <assert.h>
+#include <vector>
+#include <string>
+#include <map>
 
 extern "C"
 {
