@@ -18,7 +18,11 @@ double Vector2::magnitude() {
     return sqrt(sumOfSquares);
 }
 double Vector2::dotProduct(Vector2 other) {
-    return (x * other.x) + (y * other.y) ;
+    return fabs((x * other.x) + (y * other.y)) ;
+}
+
+void Vector2::display () {
+    printf("(%.3f, %.3f)", x, y);
 }
 
 Vector2::~Vector2()
