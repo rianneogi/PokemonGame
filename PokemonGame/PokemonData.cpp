@@ -24,7 +24,7 @@ int initPokemon()
 
 	for (int i = 0; i < 1; i++)
 	{
-		lua_getfield(LuaPokemon, -1, std::to_string(i).c_str());
+		lua_getfield(LuaPokemon, -1, std::to_string(i + 1).c_str());
 
 		lua_getfield(LuaPokemon, -1, "Name");
 		name = lua_tostring(LuaPokemon, -1);
