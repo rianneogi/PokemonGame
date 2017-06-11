@@ -24,16 +24,67 @@ int initPokemon()
 
 	for (int i = 0; i < 1; i++)
 	{
-		lua_getfield(LuaPokemon, -1, std::to_string(i + 1).c_str());
+		PokemonData d;
+
+		lua_pushinteger(LuaPokemon, i + 1);
+		lua_gettable(LuaPokemon, -2);
 
 		lua_getfield(LuaPokemon, -1, "Name");
-		name = lua_tostring(LuaPokemon, -1);
-		lua_pop(LuaPokemon, 2);
+		d.Name = lua_tostring(LuaPokemon, -1);
+		lua_pop(LuaPokemon, 1);
 
 		printf("Loading %s\n", name);
 
-		PokemonData d;
-		d.Name = name;
+		lua_getfield(LuaPokemon, -1, "BaseHP");
+		d.BaseStats[STAT_HP] = lua_tonumber(LuaPokemon, -1);
+		lua_pop(LuaPokemon, 1);
+
+		lua_getfield(LuaPokemon, -1, "BaseAtk");
+		d.BaseStats[STAT_ATK] = lua_tonumber(LuaPokemon, -1);
+		lua_pop(LuaPokemon, 1);
+
+		lua_getfield(LuaPokemon, -1, "BaseDef");
+		d.BaseStats[STAT_DEF] = lua_tonumber(LuaPokemon, -1);
+		lua_pop(LuaPokemon, 1);
+
+		lua_getfield(LuaPokemon, -1, "BaseSpAtk");
+		d.BaseStats[STAT_SPATK] = lua_tonumber(LuaPokemon, -1);
+		lua_pop(LuaPokemon, 1);
+
+		lua_getfield(LuaPokemon, -1, "BaseSpDef");
+		d.BaseStats[STAT_SPDEF] = lua_tonumber(LuaPokemon, -1);
+		lua_pop(LuaPokemon, 1);
+
+		lua_getfield(LuaPokemon, -1, "BaseSpeed");
+		d.BaseStats[STAT_SPEED] = lua_tonumber(LuaPokemon, -1);
+		lua_pop(LuaPokemon, 1);
+
+		lua_getfield(LuaPokemon, -1, "HPGain");
+		d.StatGains[STAT_HP] = lua_tonumber(LuaPokemon, -1);
+		lua_pop(LuaPokemon, 1);
+
+		lua_getfield(LuaPokemon, -1, "AtkGain");
+		d.StatGains[STAT_ATK] = lua_tonumber(LuaPokemon, -1);
+		lua_pop(LuaPokemon, 1);
+
+		lua_getfield(LuaPokemon, -1, "DefGain");
+		d.StatGains[STAT_DEF] = lua_tonumber(LuaPokemon, -1); 
+		lua_pop(LuaPokemon, 1);
+
+		lua_getfield(LuaPokemon, -1, "SpAtkGain");
+		d.StatGains[STAT_SPATK] = lua_tonumber(LuaPokemon, -1);
+		lua_pop(LuaPokemon, 1);
+
+		lua_getfield(LuaPokemon, -1, "SpAtkGain");
+		d.StatGains[STAT_SPDEF] = lua_tonumber(LuaPokemon, -1);
+		lua_pop(LuaPokemon, 1);
+
+		lua_getfield(LuaPokemon, -1, "SpeedGain");
+		d.StatGains[STAT_SPEED] = lua_tonumber(LuaPokemon, -1);
+		lua_pop(LuaPokemon, 1);
+
+		lua_pop(LuaPokemon, 1);
+		
 		PokemonDatabase.push_back(d);
 	}
 

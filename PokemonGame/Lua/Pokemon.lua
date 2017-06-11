@@ -25,17 +25,17 @@ Pokemon["1"] = {
     Types = {TYPE_GRASS, TYPE_POISON},
 
     BaseHP = 45,
-    BaseAttack = 49,
-    BaseDefense = 49,
-    BaseSpAttack = 65,
-    BaseSpDefense = 65,
+    BaseAtk = 49,
+    BaseDef = 49,
+    BaseSpAtk = 65,
+    BaseSpDef = 65,
     BaseSpeed = 45,
 
     HPGain = 2.3,
-    AttackGain = 1,
-    DefenseGain = 1,
-    SpAttackGain = 1,
-    SpDefenseGain = 1,
+    AtkGain = 1,
+    DefGain = 1,
+    SpAtkGain = 1,
+    SpDefGain = 1,
     SpeedGain = 1,
 
     Abilities = {
