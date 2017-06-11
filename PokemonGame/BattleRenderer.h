@@ -15,6 +15,13 @@ public:
 	Texture* mTilesetTexture;
 
 	Texture* mPokemonOverworld;
+	Texture* mPokemonSide;
+	Texture* mPokemonSelect;
+
+	Pokemon* mSelectedPokemon;
+
+	Timer mTimer;
+	int mSideFrame;
 
 	BattleRenderer();
 	BattleRenderer(Battle* battle);

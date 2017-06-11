@@ -20,19 +20,17 @@ int initPokemon()
 
 	lua_getglobal(LuaPokemon, "Pokemon");
 
-	std::string name;
-
-	for (int i = 0; i < 1; i++)
+	for (int i = 0; i < 9; i++)
 	{
 		PokemonData d;
 
-		lua_getfield(LuaPokemon, -1, "1");
+		lua_rawgeti(LuaPokemon, -1, i+1);
 
 		lua_getfield(LuaPokemon, -1, "Name");
 		d.Name = lua_tostring(LuaPokemon, -1);
 		lua_pop(LuaPokemon, 1);
 
-		printf("Loading %s\n", name);
+		printf("Loading %s\n", d.Name);
 
 		lua_getfield(LuaPokemon, -1, "BaseHP");
 		d.BaseStats[STAT_HP] = lua_tonumber(LuaPokemon, -1);

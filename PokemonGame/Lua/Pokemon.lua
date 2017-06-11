@@ -19,10 +19,388 @@ TYPE_FAIRY = 17
 
 Pokemon = {}
 
-Pokemon["1"] = {
+Pokemon[1] = {
     Name = "Bulbasaur",
 
     Types = {TYPE_GRASS, TYPE_POISON},
+
+    BaseHP = 45,
+    BaseAtk = 49,
+    BaseDef = 49,
+    BaseSpAtk = 65,
+    BaseSpDef = 65,
+    BaseSpeed = 45,
+
+    HPGain = 2.3,
+    AtkGain = 1,
+    DefGain = 1,
+    SpAtkGain = 1,
+    SpDefGain = 1,
+    SpeedGain = 1,
+
+    Abilities = {
+        {"Tackle", 1},
+        {"Razor Leaf", 1},
+		{"Vine Whip", 1},
+		{"Leech Seed", 1}
+    }
+}
+
+Pokemon[2] = {
+    Name = "Ivysaur",
+
+    Types = {TYPE_GRASS, TYPE_POISON},
+
+    BaseHP = 45,
+    BaseAtk = 49,
+    BaseDef = 49,
+    BaseSpAtk = 65,
+    BaseSpDef = 65,
+    BaseSpeed = 45,
+
+    HPGain = 2.3,
+    AtkGain = 1,
+    DefGain = 1,
+    SpAtkGain = 1,
+    SpDefGain = 1,
+    SpeedGain = 1,
+
+    Abilities = {
+        {"Tackle", 1},
+        {"Razor Leaf", 1},
+		{"Vine Whip", 1},
+		{"Leech Seed", 1}
+    }
+}
+
+Pokemon[3] = {
+    Name = "Venusaur",
+
+    Types = {TYPE_GRASS, TYPE_POISON},
+
+    BaseHP = 45,
+    BaseAtk = 49,
+    BaseDef = 49,
+    BaseSpAtk = 65,
+    BaseSpDef = 65,
+    BaseSpeed = 45,
+
+    HPGain = 2.3,
+    AtkGain = 1,
+    DefGain = 1,
+    SpAtkGain = 1,
+    SpDefGain = 1,
+    SpeedGain = 1,
+
+    Abilities = {
+        {"Tackle", 1},
+        {"Razor Leaf", 1},
+		{"Vine Whip", 1},
+		{"Leech Seed", 1}
+    }
+}
+
+Pokemon[4] = {
+    Name = "Charmander",
+
+    Types = {TYPE_FIRE},
+
+    BaseHP = 45,
+    BaseAtk = 49,
+    BaseDef = 49,
+    BaseSpAtk = 65,
+    BaseSpDef = 65,
+    BaseSpeed = 45,
+
+    HPGain = 2.3,
+    AtkGain = 1,
+    DefGain = 1,
+    SpAtkGain = 1,
+    SpDefGain = 1,
+    SpeedGain = 1,
+
+    Abilities = {
+        {"Tackle", 1},
+        {"Razor Leaf", 1},
+		{"Vine Whip", 1},
+		{"Leech Seed", 1}
+    }
+}
+
+Pokemon[5] = {
+    Name = "Charmeleon",
+
+    Types = {TYPE_FIRE},
+
+    BaseHP = 45,
+    BaseAtk = 49,
+    BaseDef = 49,
+    BaseSpAtk = 65,
+    BaseSpDef = 65,
+    BaseSpeed = 45,
+
+    HPGain = 2.3,
+    AtkGain = 1,
+    DefGain = 1,
+    SpAtkGain = 1,
+    SpDefGain = 1,
+    SpeedGain = 1,
+
+    Abilities = {
+        {"Tackle", 1},
+        {"Razor Leaf", 1},
+		{"Vine Whip", 1},
+		{"Leech Seed", 1}
+    }
+}
+
+Pokemon[6] = {
+    Name = "Charizard",
+
+    Types = {TYPE_FIRE},
+
+    BaseHP = 45,
+    BaseAtk = 49,
+    BaseDef = 49,
+    BaseSpAtk = 65,
+    BaseSpDef = 65,
+    BaseSpeed = 45,
+
+    HPGain = 2.3,
+    AtkGain = 1,
+    DefGain = 1,
+    SpAtkGain = 1,
+    SpDefGain = 1,
+    SpeedGain = 1,
+
+    Abilities = {
+        {"Tackle", 1},
+        {"Razor Leaf", 1},
+		{"Vine Whip", 1},
+		{"Leech Seed", 1}
+    }
+}
+
+Pokemon[7] = {
+    Name = "Squirle",
+
+    Types = {TYPE_WATER},
+
+    BaseHP = 45,
+    BaseAtk = 49,
+    BaseDef = 49,
+    BaseSpAtk = 65,
+    BaseSpDef = 65,
+    BaseSpeed = 45,
+
+    HPGain = 2.3,
+    AtkGain = 1,
+    DefGain = 1,
+    SpAtkGain = 1,
+    SpDefGain = 1,
+    SpeedGain = 1,
+
+    Abilities = {
+        {"Tackle", 1},
+        {"Razor Leaf", 1},
+		{"Vine Whip", 1},
+		{"Leech Seed", 1}
+    }
+}
+
+Pokemon[8] = {
+    Name = "Wartortle",
+
+    Types = {TYPE_WATER},
+
+    BaseHP = 45,
+    BaseAtk = 49,
+    BaseDef = 49,
+    BaseSpAtk = 65,
+    BaseSpDef = 65,
+    BaseSpeed = 45,
+
+    HPGain = 2.3,
+    AtkGain = 1,
+    DefGain = 1,
+    SpAtkGain = 1,
+    SpDefGain = 1,
+    SpeedGain = 1,
+
+    Abilities = {
+        {"Tackle", 1},
+        {"Razor Leaf", 1},
+		{"Vine Whip", 1},
+		{"Leech Seed", 1}
+    }
+}
+
+Pokemon[9] = {
+    Name = "Blastoise",
+
+    Types = {TYPE_WATER},
+
+    BaseHP = 45,
+    BaseAtk = 49,
+    BaseDef = 49,
+    BaseSpAtk = 65,
+    BaseSpDef = 65,
+    BaseSpeed = 45,
+
+    HPGain = 2.3,
+    AtkGain = 1,
+    DefGain = 1,
+    SpAtkGain = 1,
+    SpDefGain = 1,
+    SpeedGain = 1,
+
+    Abilities = {
+        {"Tackle", 1},
+        {"Razor Leaf", 1},
+		{"Vine Whip", 1},
+		{"Leech Seed", 1}
+    }
+}
+
+Pokemon[10] = {
+    Name = "Caterpie",
+
+    Types = {TYPE_BUG},
+
+    BaseHP = 45,
+    BaseAtk = 49,
+    BaseDef = 49,
+    BaseSpAtk = 65,
+    BaseSpDef = 65,
+    BaseSpeed = 45,
+
+    HPGain = 2.3,
+    AtkGain = 1,
+    DefGain = 1,
+    SpAtkGain = 1,
+    SpDefGain = 1,
+    SpeedGain = 1,
+
+    Abilities = {
+        {"Tackle", 1},
+        {"Razor Leaf", 1},
+		{"Vine Whip", 1},
+		{"Leech Seed", 1}
+    }
+}
+
+Pokemon[11] = {
+    Name = "Metapod",
+
+    Types = {TYPE_BUG},
+
+    BaseHP = 45,
+    BaseAtk = 49,
+    BaseDef = 49,
+    BaseSpAtk = 65,
+    BaseSpDef = 65,
+    BaseSpeed = 45,
+
+    HPGain = 2.3,
+    AtkGain = 1,
+    DefGain = 1,
+    SpAtkGain = 1,
+    SpDefGain = 1,
+    SpeedGain = 1,
+
+    Abilities = {
+        {"Tackle", 1},
+        {"Razor Leaf", 1},
+		{"Vine Whip", 1},
+		{"Leech Seed", 1}
+    }
+}
+
+Pokemon[12] = {
+    Name = "Butterfree",
+
+    Types = {TYPE_BUG, TYPE_FLYING},
+
+    BaseHP = 45,
+    BaseAtk = 49,
+    BaseDef = 49,
+    BaseSpAtk = 65,
+    BaseSpDef = 65,
+    BaseSpeed = 45,
+
+    HPGain = 2.3,
+    AtkGain = 1,
+    DefGain = 1,
+    SpAtkGain = 1,
+    SpDefGain = 1,
+    SpeedGain = 1,
+
+    Abilities = {
+        {"Tackle", 1},
+        {"Razor Leaf", 1},
+		{"Vine Whip", 1},
+		{"Leech Seed", 1}
+    }
+}
+
+Pokemon[13] = {
+    Name = "Weedle",
+
+    Types = {TYPE_BUG, TYPE_POISON},
+
+    BaseHP = 45,
+    BaseAtk = 49,
+    BaseDef = 49,
+    BaseSpAtk = 65,
+    BaseSpDef = 65,
+    BaseSpeed = 45,
+
+    HPGain = 2.3,
+    AtkGain = 1,
+    DefGain = 1,
+    SpAtkGain = 1,
+    SpDefGain = 1,
+    SpeedGain = 1,
+
+    Abilities = {
+        {"Tackle", 1},
+        {"Razor Leaf", 1},
+		{"Vine Whip", 1},
+		{"Leech Seed", 1}
+    }
+}
+
+Pokemon[14] = {
+    Name = "Kakuna",
+
+    Types = {TYPE_BUG, TYPE_POISON},
+
+    BaseHP = 45,
+    BaseAtk = 49,
+    BaseDef = 49,
+    BaseSpAtk = 65,
+    BaseSpDef = 65,
+    BaseSpeed = 45,
+
+    HPGain = 2.3,
+    AtkGain = 1,
+    DefGain = 1,
+    SpAtkGain = 1,
+    SpDefGain = 1,
+    SpeedGain = 1,
+
+    Abilities = {
+        {"Tackle", 1},
+        {"Razor Leaf", 1},
+		{"Vine Whip", 1},
+		{"Leech Seed", 1}
+    }
+}
+
+Pokemon[15] = {
+    Name = "Beedrill",
+
+    Types = {TYPE_BUG, TYPE_POISON},
 
     BaseHP = 45,
     BaseAtk = 49,
