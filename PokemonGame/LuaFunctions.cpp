@@ -14,26 +14,29 @@ static int printint(lua_State* L)
 
 static int getSelf(lua_State* L)
 {
-	lua_pushinteger(L, gCurrentBattle->mSelf);
+	// lua_pushinteger(L, gCurrentBattle->mSelf);
+	return -1;
 }
 
 static int getOpponent(lua_State* L)
 {
-	lua_pushinteger(L, gCurrentBattle->mOpponent);
+	// lua_pushinteger(L, gCurrentBattle->mOpponent);
 }
 
 static int dealDamage(lua_State* L)
 {
 	int pid = lua_tointeger(L, 1);
 	int dmg = lua_tointeger(L, 2);
-	gCurrentBattle->mPokemon[pid]->mLife -= dmg;
+	// gCurrentBattle->mPokemon[pid]->mLife -= dmg;
+	return -1;
 }
 
 static int heal(lua_State* L)
 {
 	int pid = lua_tointeger(L, 1);
 	int amt = lua_tointeger(L, 2);
-	gCurrentBattle->mPokemon[pid]->mLife += amt;
+	// gCurrentBattle->mPokemon[pid]->mLife += amt;
+	return -1;
 }
 
 void registerLua(lua_State* L)

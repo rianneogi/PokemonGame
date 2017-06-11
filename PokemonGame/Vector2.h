@@ -1,5 +1,6 @@
 #pragma once
 #include <math.h>
+#include <stdio.h>
 class Vector2
 {
 
@@ -10,6 +11,7 @@ public:
     void normalize();
 	double magnitude();
 	double dotProduct(Vector2 other);
+    void display();
 	~Vector2();
 };
 

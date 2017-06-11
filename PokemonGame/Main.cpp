@@ -126,20 +126,24 @@ void cleanup()
 
 int main(int argc, char* args[])
 {
-	init();
-
-	Battle* b = new Battle();
-	mBattleRenderer = new BattleRenderer(b);
-
-	World* w = new World();
-	mWorldRenderer = new WorldRenderer(w);
-
-	mainLoop();
-
-	cleanup();
-
-	delete b;
-	delete w;
-
+    printf("Hello, World!");
 	return 0;
+    // Main Code {{{
+    // init();
+    //
+    // Battle* b = new Battle();
+    // mBattleRenderer = new BattleRenderer(b);
+    //
+    // World* w = new World();
+    // mWorldRenderer = new WorldRenderer(w);
+    //
+    // mainLoop();
+    //
+    // cleanup();
+    //
+    // delete b;
+    // delete w;
+    //
+    // return 0;
+    // }}}
 }
