@@ -7,12 +7,9 @@ BattleRenderer::BattleRenderer() : mBattle(NULL)
 
 BattleRenderer::BattleRenderer(Battle* battle) : mBattle(battle)
 {
-	mBackgroundSprite = new Texture("Game Data/Sprites/Platinum/Battle-Backgrounds.png");
-	mPokemonFrontSprite = new Texture("Game Data/Sprites/RubySapphire/Gen.-1-Pokemon.png", 255, 200, 106);
-	mPokemonBackSprite = new Texture("Game Data/Sprites/RubySapphire/Gen.-1-Pokemon.png", 255, 200, 106);
-	mMenuSprite = new Texture("Game Data/Sprites/RubySapphire/Fonts-and-Menus.png", 255, 255, 255);
 	mTilesetTexture = new Texture("Graphics/Tilesets/Outside_A2.png");
-	mPokemonOverworld = new Texture("Game Data/Sprites/HeartGoldSoulSilver/Kanto-Pokemon.png");
+
+	mPokemonMap = new Texture("Game Data/Sprites/HeartGoldSoulSilver/Kanto-Pokemon.png");
 	mPokemonSide = new Texture("Game Data/Sprites/RubySapphire/Gen.-1-Pokemon.png", 255, 200, 106);
 	mPokemonSelect = new Texture("Game Data/front first frame.png");
 
@@ -40,9 +37,7 @@ BattleRenderer::BattleRenderer(Battle* battle) : mBattle(battle)
 
 BattleRenderer::~BattleRenderer()
 {
-	delete mBackgroundSprite;
-	delete mPokemonBackSprite;
-	delete mPokemonFrontSprite;
+	delete mTilesetTexture;
 }
 
 void BattleRenderer::render(SDL_Surface* surface)
@@ -85,7 +80,7 @@ void BattleRenderer::render(SDL_Surface* surface)
 				r.y += 64;
 			}
 
-			mPokemonOverworld->render(32 * p->mX, 32 * p->mY, &r);
+			mPokemonMap->render(32 * p->mX, 32 * p->mY, &r);
 
 			/*r.x = 296 + ((p->mSpecies - 1) % 3) * 328;
 			r.y = 24 + ((p->mSpecies - 1) / 3) * 72;
@@ -121,5 +116,17 @@ void BattleRenderer::update(Uint32 deltatime)
 
 void BattleRenderer::handleEvent(SDL_Event e)
 {
-
+	if (e.type == SDL_MOUSEBUTTONDOWN)
+	{
+		for (int i = 0; i < 2; i++)
+		{
+			for (int j = 0; j < 6; j++)
+			{
+				if (mSideButtons[i][j]->checkCollision(e.button.x, e.button.y))
+				{
+					mSelectedPokemon = mBattle->getPokemon(i, j);
+				}
+			}
+		}
+	}
 }

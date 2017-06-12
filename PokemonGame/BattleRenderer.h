@@ -7,14 +7,10 @@ class BattleRenderer
 {
 public:
 	Battle* mBattle;
-	Texture* mBackgroundSprite;
-	Texture* mPokemonFrontSprite;
-	Texture* mPokemonBackSprite;
-	Texture* mMenuSprite;
 
 	Texture* mTilesetTexture;
 
-	Texture* mPokemonOverworld;
+	Texture* mPokemonMap;
 	Texture* mPokemonSide;
 	Texture* mPokemonSelect;
 
