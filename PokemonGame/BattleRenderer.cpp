@@ -1,5 +1,7 @@
 #include "BattleRenderer.h"
 
+TTF_Font* gFont;
+
 BattleRenderer::BattleRenderer() : mBattle(NULL)
 {
 	printf("WARNING: default contructor for battle renderer called\n");
@@ -13,7 +15,8 @@ BattleRenderer::BattleRenderer(Battle* battle) : mBattle(battle)
 	mPokemonSide = new Texture("Game Data/Sprites/RubySapphire/Gen.-1-Pokemon.png", 255, 200, 106);
 	mPokemonSelect = new Texture("Game Data/front first frame.png");
 
-	mSelectedPokemon = NULL;
+	mSelectedPokemonTrainer = -1;
+	mSelectedPokemonID = -1;
 
 	mTimer = Timer();
 	mSideFrame = 0;
@@ -28,9 +31,17 @@ BattleRenderer::BattleRenderer(Battle* battle) : mBattle(battle)
 			r = createSDLRect(425, 35 * j + 250 * i, 32, 32);
 
 			v.clear();
-			v.push_back(createSDLRect(296 + ((p->mSpecies - 1) % 3) * 328, 24 + ((p->mSpecies - 1) / 3) * 72, 32, 32));
-			v.push_back(createSDLRect(296 + ((p->mSpecies - 1) % 3) * 328, 32 + 24 + ((p->mSpecies - 1) / 3) * 72, 32, 32));
+			v.push_back(createSDLRect(296 + ((p->mSpecies) % 3) * 328, 24 + ((p->mSpecies) / 3) * 72, 32, 32));
+			v.push_back(createSDLRect(296 + ((p->mSpecies) % 3) * 328, 32 + 24 + ((p->mSpecies) / 3) * 72, 32, 32));
 			mSideButtons[i][j] = new Button(mPokemonSide, r, v, 250);
+		}
+	}
+
+	for (int i = 0; i < 2; i++)
+	{
+		for (int j = 0; j < 6; j++)
+		{
+			mPokemonNames[i][j] = new Texture(gFont, mBattle->getPokemon(i, j)->mName, createSDLColor(255, 255, 255));
 		}
 	}
 }
@@ -61,8 +72,8 @@ void BattleRenderer::render(SDL_Surface* surface)
 		{
 			Pokemon* p = mBattle->mTrainers[i]->mPokemon[j];
 
-			r.x = ((p->mSpecies - 1) % 15) * 65;
-			r.y = ((p->mSpecies - 1) / 15) * 129;
+			r.x = ((p->mSpecies) % 15) * 65;
+			r.y = ((p->mSpecies) / 15) * 129;
 			r.w = 32;
 			r.h = 32;
 
@@ -92,16 +103,19 @@ void BattleRenderer::render(SDL_Surface* surface)
 			r.h = 32;
 			mPokemonSide->render(425, 35*j + 250*i, &r);*/
 			mSideButtons[i][j]->render();
+			mPokemonNames[i][j]->render(460, 35 * j + 250 * i);
 		}
 	}
 
-	if (mSelectedPokemon)
+	if (mSelectedPokemonID != -1)
 	{
-		r.x = ((mSelectedPokemon->mSpecies - 1) % 25) * 80;
-		r.y = ((mSelectedPokemon->mSpecies - 1) / 25) * 80;
+		Pokemon* p = mBattle->getPokemon(mSelectedPokemonTrainer, mSelectedPokemonID);
+		r.x = ((p->mSpecies) % 25) * 80;
+		r.y = ((p->mSpecies) / 25) * 80;
 		r.w = 80;
 		r.h = 80;
 		mPokemonSelect->render(20, 425, &r);
+		mPokemonNames[mSelectedPokemonTrainer][mSelectedPokemonID]->render(100, 425);
 	}
 }
 
@@ -124,7 +138,8 @@ void BattleRenderer::handleEvent(SDL_Event e)
 			{
 				if (mSideButtons[i][j]->checkCollision(e.button.x, e.button.y))
 				{
-					mSelectedPokemon = mBattle->getPokemon(i, j);
+					mSelectedPokemonTrainer = i;
+					mSelectedPokemonID = j;
 				}
 			}
 		}

@@ -3,6 +3,8 @@
 #include "LuaFunctions.h"
 #include "Button.h"
 
+extern TTF_Font* gFont;
+
 class BattleRenderer
 {
 public:
@@ -14,9 +16,11 @@ public:
 	Texture* mPokemonSide;
 	Texture* mPokemonSelect;
 
-	Pokemon* mSelectedPokemon;
+	int mSelectedPokemonID;
+	int mSelectedPokemonTrainer;
 
 	Button* mSideButtons[2][6];
+	Texture* mPokemonNames[2][6];
 
 	Timer mTimer;
 	int mSideFrame;

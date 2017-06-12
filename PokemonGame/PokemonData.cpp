@@ -3,6 +3,8 @@
 lua_State* LuaPokemon;
 std::vector<PokemonData> PokemonDatabase;
 
+int POKEMON_COUNT = 12;
+
 int initPokemon()
 {
 	LuaPokemon = luaL_newstate();
@@ -20,7 +22,7 @@ int initPokemon()
 
 	lua_getglobal(LuaPokemon, "Pokemon");
 
-	for (int i = 0; i < 9; i++)
+	for (int i = 0; i < POKEMON_COUNT; i++)
 	{
 		PokemonData d;
 

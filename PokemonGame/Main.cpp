@@ -100,6 +100,13 @@ void init()
 		printf("SDL_image could not initialize! SDL_image Error: %s\n", IMG_GetError());
 	}
 
+	//Initialize SDL_ttf
+	if (TTF_Init() == -1)
+	{
+		printf("SDL_ttf could not initialize! SDL_ttf Error: %s\n", TTF_GetError());
+
+	}
+
 	gRenderer = SDL_CreateRenderer(gWindow, -1, SDL_RENDERER_ACCELERATED);
 	if (gRenderer == NULL)
 	{
@@ -109,6 +116,12 @@ void init()
 	{
 		//Initialize renderer color
 		SDL_SetRenderDrawColor(gRenderer, 0x0, 0x0, 0x0, 0xFF);
+	}
+
+	gFont = TTF_OpenFont("Graphics/OxygenMono.ttf", 16);
+	if (gFont == NULL)
+	{
+		printf("Failed to load font! SDL_ttf Error: %s\n", TTF_GetError());
 	}
 
 	initPokemon();
@@ -122,6 +135,8 @@ void cleanup()
 	gRenderer = NULL;
 	gWindow = NULL;
 
+	TTF_CloseFont(gFont);
+
 	delete mBattleRenderer;
 	delete mWorldRenderer;
 }
@@ -133,19 +148,19 @@ int main(int argc, char* args[])
 	Trainer* t1 = new Trainer(0);
 	Trainer* t2 = new Trainer(1);
 
+	t1->mPokemon.push_back(new Pokemon(0, 5));
 	t1->mPokemon.push_back(new Pokemon(1, 5));
 	t1->mPokemon.push_back(new Pokemon(2, 5));
 	t1->mPokemon.push_back(new Pokemon(3, 5));
 	t1->mPokemon.push_back(new Pokemon(4, 5));
 	t1->mPokemon.push_back(new Pokemon(5, 5));
-	t1->mPokemon.push_back(new Pokemon(6, 5));
 
+	t2->mPokemon.push_back(new Pokemon(6, 5));
 	t2->mPokemon.push_back(new Pokemon(7, 5));
 	t2->mPokemon.push_back(new Pokemon(8, 5));
 	t2->mPokemon.push_back(new Pokemon(9, 5));
 	t2->mPokemon.push_back(new Pokemon(10, 5));
 	t2->mPokemon.push_back(new Pokemon(11, 5));
-	t2->mPokemon.push_back(new Pokemon(12, 5));
 
 	Battle* b = new Battle(t1, t2);
 	mBattleRenderer = new BattleRenderer(b);

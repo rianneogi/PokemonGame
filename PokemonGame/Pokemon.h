@@ -13,28 +13,18 @@ public:
 
 	int mLevel;
 
-	int mLife;
-	int mAttack;
-	int mSpecialAttack;
-	int mDefense;
-	int mSpecialDefense;
-	int mSpeed;
+	float mStats[STAT_NUM];
+	float mStatGains[STAT_NUM];
 
-	int mLifePerLvl;
-	int mAttackPerLvl;
-	int mSpecialAttackPerLvl;
-	int mDefensePerLvl;
-	int mSpecialDefensePerLvl;
-	int mSpeedPerLvl;
+	std::vector<Ability> mAbilities;
 
+	float mCurrentHP;
 	int mAccuracy;
 	int mEvasion;
-
 	int mX;
 	int mY;
 	int mFacing;
 
-	std::vector<Ability> mAbilities;
 	std::vector<StatusEffect> mStatusEffects;
 
 	Pokemon(int species, int lvl);

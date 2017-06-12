@@ -14,6 +14,26 @@ SDL_Rect createSDLRect(int x, int y, int w, int h)
 	return r;
 }
 
+SDL_Color createSDLColor(int r, int g, int b)
+{
+	SDL_Color c;
+	c.r = r;
+	c.g = g;
+	c.b = b;
+	c.a = 255;
+	return c;
+}
+
+SDL_Color createSDLColor(int r, int g, int b, int a)
+{
+	SDL_Color c;
+	c.r = r;
+	c.g = g;
+	c.b = b;
+	c.a = a;
+	return c;
+}
+
 SDL_Surface* loadSurface(std::string path)
 {
 	//The final optimized image
