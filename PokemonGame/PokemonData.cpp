@@ -119,7 +119,7 @@ int initPokemon()
 		d.StatGains[STAT_SPATK] = lua_tonumber(LuaPokemon, -1);
 		lua_pop(LuaPokemon, 1);
 
-		lua_getfield(LuaPokemon, -1, "SpAtkGain");
+		lua_getfield(LuaPokemon, -1, "SpDefGain");
 		d.StatGains[STAT_SPDEF] = lua_tonumber(LuaPokemon, -1);
 		lua_pop(LuaPokemon, 1);
 

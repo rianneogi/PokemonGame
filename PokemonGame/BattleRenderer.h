@@ -6,6 +6,8 @@
 extern TTF_Font* gFont;
 extern TTF_Font* gFontSmall;
 
+extern std::string gStatNames[STAT_NUM];
+
 class BattleRenderer
 {
 public:
@@ -24,7 +26,8 @@ public:
 
 	Button* mSideButtons[2][6];
 	Texture* mPokemonNames[2][6];
-	Texture* mPokemonHPText[2][6];
+	Texture* mPokemonStatText[2][6][STAT_NUM];
+	Texture* mHPText;
 
 	Timer mTimer;
 	int mSelectFrame;
