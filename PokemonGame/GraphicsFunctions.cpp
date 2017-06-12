@@ -4,6 +4,16 @@ SDL_Window* gWindow = NULL;
 SDL_Surface* gScreenSurface = NULL;
 SDL_Renderer* gRenderer = NULL;
 
+SDL_Rect createSDLRect(int x, int y, int w, int h)
+{
+	SDL_Rect r;
+	r.x = x;
+	r.y = y;
+	r.w = w;
+	r.h = h;
+	return r;
+}
+
 SDL_Surface* loadSurface(std::string path)
 {
 	//The final optimized image

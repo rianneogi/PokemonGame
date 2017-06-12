@@ -20,6 +20,22 @@ BattleRenderer::BattleRenderer(Battle* battle) : mBattle(battle)
 
 	mTimer = Timer();
 	mSideFrame = 0;
+
+	SDL_Rect r;
+	std::vector<SDL_Rect> v;
+	for (int i = 0; i < 2; i++)
+	{
+		for (int j = 0; j < 6; j++)
+		{
+			Pokemon* p = mBattle->mTrainers[i]->mPokemon[j];
+			r = createSDLRect(425, 35 * j + 250 * i, 32, 32);
+
+			v.clear();
+			v.push_back(createSDLRect(296 + ((p->mSpecies - 1) % 3) * 328, 24 + ((p->mSpecies - 1) / 3) * 72, 32, 32));
+			v.push_back(createSDLRect(296 + ((p->mSpecies - 1) % 3) * 328, 32 + 24 + ((p->mSpecies - 1) / 3) * 72, 32, 32));
+			mSideButtons[i][j] = new Button(mPokemonSide, r, v, 250);
+		}
+	}
 }
 
 BattleRenderer::~BattleRenderer()
@@ -71,7 +87,7 @@ void BattleRenderer::render(SDL_Surface* surface)
 
 			mPokemonOverworld->render(32 * p->mX, 32 * p->mY, &r);
 
-			r.x = 296 + ((p->mSpecies - 1) % 3) * 328;
+			/*r.x = 296 + ((p->mSpecies - 1) % 3) * 328;
 			r.y = 24 + ((p->mSpecies - 1) / 3) * 72;
 			if (mSideFrame)
 			{
@@ -79,7 +95,8 @@ void BattleRenderer::render(SDL_Surface* surface)
 			}
 			r.w = 32;
 			r.h = 32;
-			mPokemonSide->render(425, 35*j + 250*i, &r);
+			mPokemonSide->render(425, 35*j + 250*i, &r);*/
+			mSideButtons[i][j]->render();
 		}
 	}
 

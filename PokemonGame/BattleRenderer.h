@@ -1,7 +1,7 @@
 #pragma once
 
 #include "LuaFunctions.h"
-#include "Texture.h"
+#include "Button.h"
 
 class BattleRenderer
 {
@@ -19,6 +19,8 @@ public:
 	Texture* mPokemonSelect;
 
 	Pokemon* mSelectedPokemon;
+
+	Button* mSideButtons[2][6];
 
 	Timer mTimer;
 	int mSideFrame;
