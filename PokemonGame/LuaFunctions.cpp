@@ -1,5 +1,7 @@
 #include "LuaFunctions.h"
 
+Battle* gCurrentBattle;
+
 static int printstr(lua_State* L)
 {
 	std::cout << lua_tostring(L, 1);
@@ -38,10 +40,47 @@ static int dealDamage(lua_State* L)
 	dmg *= gTypeEffectiveness[type][defender->mPrimaryType] * gTypeEffectiveness[type][defender->mSecondaryType];
 	if (type == attacker->mPrimaryType || type == attacker->mSecondaryType)
 	{
-		dmg *= 1.25; //STAB bonus
+		dmg *= 1.33; //STAB bonus
 	}
 
 	defender->mCurrentHP -= dmg;
+	return 0;
+}
+
+static int applyStatus(lua_State* L)
+{
+	int atker_id = lua_tointeger(L, 1);
+	int dfnder_id = lua_tointeger(L, 2);
+	int status_name = lua_tointeger(L, 3);
+	int pow = lua_tointeger(L, 4);
+	int type = lua_tointeger(L, 5);
+
+	Pokemon* attacker = gCurrentBattle->getPokemon(atker_id);
+	Pokemon* defender = gCurrentBattle->getPokemon(dfnder_id);
+
+	float strength = pow * attacker->mStats[STAT_SPATK] / defender->mStats[STAT_SPDEF];
+	strength *= gTypeEffectiveness[type][defender->mPrimaryType] * gTypeEffectiveness[type][defender->mSecondaryType];
+	if (type == attacker->mPrimaryType || type == attacker->mSecondaryType)
+	{
+		strength *= 1.33; //STAB bonus
+	}
+
+	if (strength >= 10)
+	{
+		defender->mStatusEffects.push_back(StatusEffect());
+	}
+	return 0;
+}
+
+static int move(lua_State* L)
+{
+	int pid = lua_tointeger(L, 1);
+	int x = lua_tointeger(L, 2);
+	int y = lua_tointeger(L, 3);
+
+	gCurrentBattle->getPokemon(pid)->mX = x;
+	gCurrentBattle->getPokemon(pid)->mY = y;
+
 	return 0;
 }
 

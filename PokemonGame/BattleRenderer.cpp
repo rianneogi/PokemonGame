@@ -16,6 +16,7 @@ BattleRenderer::BattleRenderer(Battle* battle) : mBattle(battle)
 	mPokemonSide = new Texture("Game Data/Sprites/RubySapphire/Gen.-1-Pokemon.png", 255, 200, 106);
 	mPokemonSelect = new Texture("Game Data/front first frame.png");
 	mPokemonSelect2 = new Texture("Game Data/front second frame.png");
+	mTypeTexture = new Texture("Graphics/typesheet.png");
 
 	mSelectedPokemonTrainer = -1;
 	mSelectedPokemonID = -1;
@@ -153,7 +154,22 @@ void BattleRenderer::render(SDL_Surface* surface)
 		}
 		
 		mPokemonNames[mSelectedPokemonTrainer][mSelectedPokemonID]->render(100, 425);
-		mPokemonHPText[mSelectedPokemonTrainer][mSelectedPokemonID]->render(100, 440);
+		mPokemonHPText[mSelectedPokemonTrainer][mSelectedPokemonID]->render(100, 442);
+
+		r.x = 32 * p->mPrimaryType;
+		r.y = 0;
+		r.w = 32;
+		r.h = 14;
+		mTypeTexture->render(200, 442, &r);
+
+		if (p->mSecondaryType != -1)
+		{
+			r.x = 32 * p->mSecondaryType;
+			r.y = 0;
+			r.w = 32;
+			r.h = 14;
+			mTypeTexture->render(233, 442, &r);
+		}
 	}
 }
 

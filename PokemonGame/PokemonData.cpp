@@ -50,12 +50,35 @@ int initPokemon()
 
 		lua_rawgeti(LuaPokemon, -1, i+1);
 
+		//Name
 		lua_getfield(LuaPokemon, -1, "Name");
 		d.Name = lua_tostring(LuaPokemon, -1);
 		lua_pop(LuaPokemon, 1);
 
 		printf("Loading %s\n", d.Name);
 
+		//Type
+		lua_getfield(LuaPokemon, -1, "Types");
+		lua_rawgeti(LuaPokemon, -1, 1);
+		d.PrimaryType = lua_tointeger(LuaPokemon, -1);
+		lua_pop(LuaPokemon, 1);
+		lua_len(LuaPokemon, -1);
+		if (luaL_checkinteger(LuaPokemon, -1) > 1)
+		{
+			lua_pop(LuaPokemon, 1);
+			lua_rawgeti(LuaPokemon, -1, 2);
+			d.SecondaryType = lua_tointeger(LuaPokemon, -1);
+			lua_pop(LuaPokemon, 1);
+		}
+		else
+		{
+			lua_pop(LuaPokemon, 1);
+			d.SecondaryType = -1;
+		}
+		lua_pop(LuaPokemon, 1);
+
+
+		//Stats
 		lua_getfield(LuaPokemon, -1, "BaseHP");
 		d.BaseStats[STAT_HP] = lua_tonumber(LuaPokemon, -1);
 		lua_pop(LuaPokemon, 1);

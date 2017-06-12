@@ -17,6 +17,7 @@ public:
 	Texture* mPokemonSide;
 	Texture* mPokemonSelect;
 	Texture* mPokemonSelect2;
+	Texture* mTypeTexture;
 
 	int mSelectedPokemonID;
 	int mSelectedPokemonTrainer;
