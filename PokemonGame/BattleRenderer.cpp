@@ -12,7 +12,7 @@ BattleRenderer::BattleRenderer(Battle* battle) : mBattle(battle)
 {
 	mTilesetTexture = new Texture("Graphics/Tilesets/Outside_A2.png");
 
-	mPokemonMap = new Texture("Game Data/Sprites/HeartGoldSoulSilver/Kanto-Pokemon.png");
+	mPokemonMap = new Texture("Game Data/Sprites/HeartGoldSoulSilver/Kanto-Pokemon.png", 160, 176, 128);
 	mPokemonSide = new Texture("Game Data/Sprites/RubySapphire/Gen.-1-Pokemon.png", 255, 200, 106);
 	mPokemonSelect = new Texture("Game Data/front first frame.png");
 	mPokemonSelect2 = new Texture("Game Data/front second frame.png");
@@ -88,8 +88,17 @@ void BattleRenderer::render(SDL_Surface* surface)
 		{
 			Pokemon* p = mBattle->mTrainers[i]->mPokemon[j];
 
-			r.x = ((p->mSpecies) % 15) * 65;
-			r.y = ((p->mSpecies) / 15) * 129;
+			if (p->mSpecies >= 3)
+			{
+				r.x = ((p->mSpecies+1) % 15) * 65;
+				r.y = ((p->mSpecies+1) / 15) * 129;
+			}
+			else
+			{
+				r.x = ((p->mSpecies) % 15) * 65;
+				r.y = ((p->mSpecies) / 15) * 129;
+			}
+			
 			r.w = 32;
 			r.h = 32;
 

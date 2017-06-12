@@ -166,9 +166,9 @@ Pokemon[6] = {
     BaseSpDef = 90,
     BaseSpeed = 100,
 
-    HPGain = 3,
-    AtkGain = 2.5,
-    DefGain = 2,
+    HPGain = 2,
+    AtkGain = 3,
+    DefGain = 2.5,
     SpAtkGain = 2,
     SpDefGain = 2.5,
     SpeedGain = 3,

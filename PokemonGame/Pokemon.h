@@ -12,7 +12,7 @@ public:
 	std::string mName;
 
 	int mLevel;
-
+	int mMovement;
 	float mStats[STAT_NUM];
 	float mStatGains[STAT_NUM];
 

@@ -42,3 +42,15 @@ int& Battle::getTile(int i, int j)
 	return mTiles[i * 13 + j];
 }
 
+bool Battle::move(int trainer, int num, int x, int y)
+{
+	Pokemon* p = getPokemon(trainer, num);
+	if (abs(p->mX - x) <= p->mMovement && abs(p->mY - y) <= p->mMovement)
+	{
+		p->mX = x;
+		p->mY = y;
+		return true;
+	}
+	return false;
+}
+

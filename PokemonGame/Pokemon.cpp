@@ -16,6 +16,7 @@ Pokemon::Pokemon(int species, int level) : mSpecies(species), mLevel(level)
 	}
 
 	mCurrentHP = mStats[STAT_HP];
+	mMovement = 2;
 }
 
 Pokemon::~Pokemon()

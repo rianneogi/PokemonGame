@@ -2,7 +2,7 @@
 
 #include "Trainer.h"
 
-enum Tile { TILE_GRASS, TILE_};
+enum Tile { TILE_GRASS };
 
 class Battle
 {
@@ -29,5 +29,7 @@ public:
 
 	Pokemon* getPokemon(int trainer, int num);
 	int& getTile(int i, int j);
+
+	bool move(int trainer, int num, int x, int y);
 };
 
