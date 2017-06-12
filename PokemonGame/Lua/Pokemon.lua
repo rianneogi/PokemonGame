@@ -24,19 +24,19 @@ Pokemon[1] = {
 
     Types = {TYPE_GRASS, TYPE_POISON},
 
-    BaseHP = 45,
-    BaseAtk = 49,
-    BaseDef = 49,
-    BaseSpAtk = 65,
-    BaseSpDef = 65,
-    BaseSpeed = 45,
+    BaseHP = 60,
+    BaseAtk = 50,
+    BaseDef = 40,
+    BaseSpAtk = 60,
+    BaseSpDef = 40,
+    BaseSpeed = 50,
 
-    HPGain = 2.3,
-    AtkGain = 1,
-    DefGain = 1,
-    SpAtkGain = 1,
-    SpDefGain = 1,
-    SpeedGain = 1,
+    HPGain = 2.5,
+    AtkGain = 2,
+    DefGain = 1.5,
+    SpAtkGain = 2.5,
+    SpDefGain = 1.5,
+    SpeedGain = 2,
 
     Abilities = {
         {"Tackle", 1},
@@ -105,19 +105,19 @@ Pokemon[4] = {
 
     Types = {TYPE_FIRE},
 
-    BaseHP = 45,
-    BaseAtk = 49,
-    BaseDef = 49,
-    BaseSpAtk = 65,
-    BaseSpDef = 65,
-    BaseSpeed = 45,
+    BaseHP = 40,
+    BaseAtk = 60,
+    BaseDef = 50,
+    BaseSpAtk = 40,
+    BaseSpDef = 50,
+    BaseSpeed = 60,
 
-    HPGain = 2.3,
-    AtkGain = 1,
-    DefGain = 1,
-    SpAtkGain = 1,
-    SpDefGain = 1,
-    SpeedGain = 1,
+    HPGain = 1.5,
+    AtkGain = 2.5,
+    DefGain = 2,
+    SpAtkGain = 1.5,
+    SpDefGain = 2,
+    SpeedGain = 2.5,
 
     Abilities = {
         {"Tackle", 1},
@@ -132,12 +132,12 @@ Pokemon[5] = {
 
     Types = {TYPE_FIRE},
 
-    BaseHP = 45,
-    BaseAtk = 49,
-    BaseDef = 49,
-    BaseSpAtk = 65,
-    BaseSpDef = 65,
-    BaseSpeed = 45,
+    BaseHP = 60,
+    BaseAtk = 80,
+    BaseDef = 70,
+    BaseSpAtk = 60,
+    BaseSpDef = 70,
+    BaseSpeed = 80,
 
     HPGain = 2.3,
     AtkGain = 1,
@@ -186,19 +186,19 @@ Pokemon[7] = {
 
     Types = {TYPE_WATER},
 
-    BaseHP = 45,
-    BaseAtk = 49,
-    BaseDef = 49,
-    BaseSpAtk = 65,
-    BaseSpDef = 65,
-    BaseSpeed = 45,
+    BaseHP = 50,
+    BaseAtk = 40,
+    BaseDef = 60,
+    BaseSpAtk = 50,
+    BaseSpDef = 60,
+    BaseSpeed = 40,
 
-    HPGain = 2.3,
-    AtkGain = 1,
-    DefGain = 1,
-    SpAtkGain = 1,
-    SpDefGain = 1,
-    SpeedGain = 1,
+    HPGain = 2,
+    AtkGain = 1.5,
+    DefGain = 2.5,
+    SpAtkGain = 2,
+    SpDefGain = 2.5,
+    SpeedGain = 1.5,
 
     Abilities = {
         {"Tackle", 1},
@@ -213,12 +213,12 @@ Pokemon[8] = {
 
     Types = {TYPE_WATER},
 
-    BaseHP = 45,
-    BaseAtk = 49,
-    BaseDef = 49,
-    BaseSpAtk = 65,
-    BaseSpDef = 65,
-    BaseSpeed = 45,
+    BaseHP = 70,
+    BaseAtk = 60,
+    BaseDef = 80,
+    BaseSpAtk = 70,
+    BaseSpDef = 80,
+    BaseSpeed = 60,
 
     HPGain = 2.3,
     AtkGain = 1,

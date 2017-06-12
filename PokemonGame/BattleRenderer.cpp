@@ -122,7 +122,7 @@ void BattleRenderer::render(SDL_Surface* surface)
 			mPokemonNames[i][j]->render(460, 35 * j + 250 * i);
 
 			std::string hp_string = std::to_string(int(p->mCurrentHP)) + "/" + std::to_string(int(p->mStats[STAT_HP]));
-			mPokemonHPText[i][j] = new Texture(gFontSmall, hp_string, createSDLColor(255, 255, 255));
+			mPokemonHPText[i][j]->loadFromText(gFontSmall, hp_string, createSDLColor(255, 255, 255));
 			mPokemonHPText[i][j]->render(460, 35 * j + 250 * i + 20);
 		}
 	}
