@@ -14,12 +14,13 @@ BattleRenderer::BattleRenderer(Battle* battle) : mBattle(battle)
 	mPokemonMap = new Texture("Game Data/Sprites/HeartGoldSoulSilver/Kanto-Pokemon.png");
 	mPokemonSide = new Texture("Game Data/Sprites/RubySapphire/Gen.-1-Pokemon.png", 255, 200, 106);
 	mPokemonSelect = new Texture("Game Data/front first frame.png");
+	mPokemonSelect2 = new Texture("Game Data/front second frame.png");
 
 	mSelectedPokemonTrainer = -1;
 	mSelectedPokemonID = -1;
 
 	mTimer = Timer();
-	mSideFrame = 0;
+	mSelectFrame = 0;
 
 	SDL_Rect r;
 	std::vector<SDL_Rect> v;
@@ -49,6 +50,18 @@ BattleRenderer::BattleRenderer(Battle* battle) : mBattle(battle)
 BattleRenderer::~BattleRenderer()
 {
 	delete mTilesetTexture;
+	delete mPokemonMap;
+	delete mPokemonSelect;
+	delete mPokemonSide;
+
+	for (int i = 0; i < 2; i++)
+	{
+		for (int j = 0; j < 6; j++)
+		{
+			delete mSideButtons[i][j];
+			delete mPokemonNames[i][j];
+		}
+	}
 }
 
 void BattleRenderer::render(SDL_Surface* surface)
@@ -114,16 +127,24 @@ void BattleRenderer::render(SDL_Surface* surface)
 		r.y = ((p->mSpecies) / 25) * 80;
 		r.w = 80;
 		r.h = 80;
-		mPokemonSelect->render(20, 425, &r);
+		if (mSelectFrame == 1)
+		{
+			mPokemonSelect2->render(20, 425, &r);
+		}
+		else
+		{
+			mPokemonSelect->render(20, 425, &r);
+		}
+		
 		mPokemonNames[mSelectedPokemonTrainer][mSelectedPokemonID]->render(100, 425);
 	}
 }
 
 void BattleRenderer::update(Uint32 deltatime)
 {
-	if (mTimer.getElaspedTime() >= 250)
+	if (mTimer.getElaspedTime() >= 250 && mSelectFrame < 2)
 	{
-		mSideFrame = (mSideFrame + 1) % 2;
+		mSelectFrame++;
 		mTimer.restart();
 	}
 }
@@ -140,6 +161,8 @@ void BattleRenderer::handleEvent(SDL_Event e)
 				{
 					mSelectedPokemonTrainer = i;
 					mSelectedPokemonID = j;
+					mSelectFrame = 0;
+					mTimer.restart();
 				}
 			}
 		}

@@ -15,6 +15,7 @@ public:
 	Texture* mPokemonMap;
 	Texture* mPokemonSide;
 	Texture* mPokemonSelect;
+	Texture* mPokemonSelect2;
 
 	int mSelectedPokemonID;
 	int mSelectedPokemonTrainer;
@@ -23,7 +24,7 @@ public:
 	Texture* mPokemonNames[2][6];
 
 	Timer mTimer;
-	int mSideFrame;
+	int mSelectFrame;
 
 	BattleRenderer();
 	BattleRenderer(Battle* battle);
