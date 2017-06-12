@@ -153,19 +153,19 @@ int main(int argc, char* args[])
 	Trainer* t1 = new Trainer(0);
 	Trainer* t2 = new Trainer(1);
 
-	t1->mPokemon.push_back(new Pokemon(0, 100));
-	t1->mPokemon.push_back(new Pokemon(1, 100));
 	t1->mPokemon.push_back(new Pokemon(2, 100));
-	t1->mPokemon.push_back(new Pokemon(3, 100));
-	t1->mPokemon.push_back(new Pokemon(4, 100));
 	t1->mPokemon.push_back(new Pokemon(5, 100));
+	t1->mPokemon.push_back(new Pokemon(8, 100));
+	t1->mPokemon.push_back(new Pokemon(30, 100));
+	t1->mPokemon.push_back(new Pokemon(33, 100));
+	t1->mPokemon.push_back(new Pokemon(35, 100));
 
-	t2->mPokemon.push_back(new Pokemon(6, 100));
-	t2->mPokemon.push_back(new Pokemon(7, 100));
-	t2->mPokemon.push_back(new Pokemon(8, 100));
-	t2->mPokemon.push_back(new Pokemon(9, 100));
-	t2->mPokemon.push_back(new Pokemon(10, 100));
-	t2->mPokemon.push_back(new Pokemon(11, 100));
+	t2->mPokemon.push_back(new Pokemon(37, 100));
+	t2->mPokemon.push_back(new Pokemon(39, 100));
+	t2->mPokemon.push_back(new Pokemon(41, 100));
+	t2->mPokemon.push_back(new Pokemon(44, 100));
+	t2->mPokemon.push_back(new Pokemon(46, 100));
+	t2->mPokemon.push_back(new Pokemon(48, 100));
 
 	Battle* b = new Battle(t1, t2);
 	mBattleRenderer = new BattleRenderer(b);

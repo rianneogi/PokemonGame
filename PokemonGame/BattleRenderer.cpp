@@ -100,10 +100,15 @@ void BattleRenderer::render(SDL_Surface* surface)
 		{
 			Pokemon* p = mBattle->mTrainers[i]->mPokemon[j];
 
-			if (p->mSpecies >= 3)
+			if (p->mSpecies >= 25)
 			{
-				r.x = ((p->mSpecies+1) % 15) * 65;
-				r.y = ((p->mSpecies+1) / 15) * 129;
+				r.x = ((p->mSpecies + 2) % 15) * 65;
+				r.y = ((p->mSpecies + 2) / 15) * 129;
+			}
+			else if (p->mSpecies >= 3)
+			{
+				r.x = ((p->mSpecies + 1) % 15) * 65;
+				r.y = ((p->mSpecies + 1) / 15) * 129;
 			}
 			else
 			{

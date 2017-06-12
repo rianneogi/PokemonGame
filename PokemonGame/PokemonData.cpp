@@ -3,7 +3,7 @@
 lua_State* LuaPokemon;
 std::vector<PokemonData> PokemonDatabase;
 
-int POKEMON_COUNT = 22;
+int POKEMON_NUM = 49;
 
 float gTypeEffectiveness[TYPE_NUM][TYPE_NUM] =
 {   //NOR FIG FLY POI GRO ROC BUG GHO STE FIR WAT GRA ELE PSY ICE DRA DAR FAI
@@ -44,7 +44,7 @@ int initPokemon()
 
 	lua_getglobal(LuaPokemon, "Pokemon");
 
-	for (int i = 0; i < POKEMON_COUNT; i++)
+	for (int i = 0; i < POKEMON_NUM; i++)
 	{
 		PokemonData d;
 
