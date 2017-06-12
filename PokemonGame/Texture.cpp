@@ -86,9 +86,9 @@ bool Texture::loadFromText(TTF_Font* font, std::string text, SDL_Color color)
 {
 	//Get rid of preexisting texture
 	free();
-
+	
 	//Render text surface
-	SDL_Surface* textSurface = TTF_RenderText_Solid(font, text.c_str(), color);
+	SDL_Surface* textSurface = TTF_RenderText_Blended(font, text.c_str(), color);
 	if (textSurface == NULL)
 	{
 		printf("Unable to render text surface! SDL_ttf Error: %s\n", TTF_GetError());
@@ -118,8 +118,11 @@ bool Texture::loadFromText(TTF_Font* font, std::string text, SDL_Color color)
 
 void Texture::free()
 {
-	SDL_DestroyTexture(mTexture);
-	mTexture = NULL;
+	if (mTexture)
+	{
+		SDL_DestroyTexture(mTexture);
+		mTexture = NULL;
+	}
 }
 
 void Texture::setColor(Uint8 red, Uint8 green, Uint8 blue)

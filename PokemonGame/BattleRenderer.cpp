@@ -1,6 +1,7 @@
 #include "BattleRenderer.h"
 
-TTF_Font* gFont;
+TTF_Font* gFont; 
+TTF_Font* gFontSmall;
 
 BattleRenderer::BattleRenderer() : mBattle(NULL)
 {
@@ -43,6 +44,7 @@ BattleRenderer::BattleRenderer(Battle* battle) : mBattle(battle)
 		for (int j = 0; j < 6; j++)
 		{
 			mPokemonNames[i][j] = new Texture(gFont, mBattle->getPokemon(i, j)->mName, createSDLColor(255, 255, 255));
+			mPokemonHPText[i][j] = new Texture();
 		}
 	}
 }
@@ -60,6 +62,7 @@ BattleRenderer::~BattleRenderer()
 		{
 			delete mSideButtons[i][j];
 			delete mPokemonNames[i][j];
+			delete mPokemonHPText[i][j];
 		}
 	}
 }
@@ -117,6 +120,10 @@ void BattleRenderer::render(SDL_Surface* surface)
 			mPokemonSide->render(425, 35*j + 250*i, &r);*/
 			mSideButtons[i][j]->render();
 			mPokemonNames[i][j]->render(460, 35 * j + 250 * i);
+
+			std::string hp_string = std::to_string(int(p->mCurrentHP)) + "/" + std::to_string(int(p->mStats[STAT_HP]));
+			mPokemonHPText[i][j] = new Texture(gFontSmall, hp_string, createSDLColor(255, 255, 255));
+			mPokemonHPText[i][j]->render(460, 35 * j + 250 * i + 20);
 		}
 	}
 
@@ -137,6 +144,7 @@ void BattleRenderer::render(SDL_Surface* surface)
 		}
 		
 		mPokemonNames[mSelectedPokemonTrainer][mSelectedPokemonID]->render(100, 425);
+		mPokemonHPText[mSelectedPokemonTrainer][mSelectedPokemonID]->render(100, 445);
 	}
 }
 

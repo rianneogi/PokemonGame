@@ -123,6 +123,11 @@ void init()
 	{
 		printf("Failed to load font! SDL_ttf Error: %s\n", TTF_GetError());
 	}
+	gFontSmall = TTF_OpenFont("Graphics/OxygenMono.ttf", 12);
+	if (gFontSmall == NULL)
+	{
+		printf("Failed to load font! SDL_ttf Error: %s\n", TTF_GetError());
+	}
 
 	initPokemon();
 }

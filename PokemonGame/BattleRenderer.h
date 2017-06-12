@@ -4,6 +4,7 @@
 #include "Button.h"
 
 extern TTF_Font* gFont;
+extern TTF_Font* gFontSmall;
 
 class BattleRenderer
 {
@@ -22,6 +23,7 @@ public:
 
 	Button* mSideButtons[2][6];
 	Texture* mPokemonNames[2][6];
+	Texture* mPokemonHPText[2][6];
 
 	Timer mTimer;
 	int mSelectFrame;

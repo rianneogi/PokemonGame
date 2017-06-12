@@ -10,9 +10,9 @@ Pokemon::Pokemon(int species, int level) : mSpecies(species), mLevel(level)
 		mStatGains[i] = PokemonDatabase[species].StatGains[i];
 	}
 
-	for (int i = 1; i < level; i++)
+	for (int i = 0; i < STAT_NUM; i++)
 	{
-		mStats[i] += mStatGains[i];
+		mStats[i] += (level-1)*mStatGains[i];
 	}
 
 	mCurrentHP = mStats[STAT_HP];
