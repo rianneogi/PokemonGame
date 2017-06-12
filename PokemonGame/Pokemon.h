@@ -11,6 +11,9 @@ public:
 
 	std::string mName;
 
+	int mPrimaryType;
+	int mSecondaryType;
+
 	int mLevel;
 	int mMovement;
 	float mStats[STAT_NUM];

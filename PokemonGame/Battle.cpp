@@ -32,6 +32,11 @@ Battle::~Battle()
 	delete[] mTiles;
 }
 
+Pokemon* Battle::getPokemon(int id)
+{
+	return mTrainers[id/6]->mPokemon[id%6];
+}
+
 Pokemon* Battle::getPokemon(int trainer, int num)
 {
 	return mTrainers[trainer]->mPokemon[num];

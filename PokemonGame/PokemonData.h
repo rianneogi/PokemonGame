@@ -17,7 +17,8 @@ public:
 	std::string Name;
 
 	int Species;
-	uint32_t Type;
+	int PrimaryType;
+	int SecondaryType;
 	
 	double BaseStats[STAT_NUM];
 	double StatGains[STAT_NUM];
