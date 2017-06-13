@@ -28,6 +28,8 @@ public:
 	int mY;
 	int mFacing;
 
+	int mHasMoved;
+
 	std::vector<StatusEffect> mStatusEffects;
 
 	Pokemon(int species, int lvl);

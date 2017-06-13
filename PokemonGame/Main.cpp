@@ -118,7 +118,7 @@ void init()
 		SDL_SetRenderDrawColor(gRenderer, 0x0, 0x0, 0x0, 0xFF);
 	}
 
-	gFont = TTF_OpenFont("Graphics/OxygenMono.ttf", 16);
+	gFont = TTF_OpenFont("Graphics/OxygenMono.ttf", 15);
 	if (gFont == NULL)
 	{
 		printf("Failed to load font! SDL_ttf Error: %s\n", TTF_GetError());

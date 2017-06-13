@@ -23,6 +23,10 @@ public:
 	Pokemon* getPokemon(int trainer, int num);
 	int& getTile(int i, int j);
 
-	bool move(int trainer, int num, int x, int y);
+	bool attemptMove(int trainer, int num, int x, int y);
+	bool attemptAttack(int trainer, int num, int attack_id, int target);
+
+	void checkTurn();
+	void resetPokemon();
 };
 

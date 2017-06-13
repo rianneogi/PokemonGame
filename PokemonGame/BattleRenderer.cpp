@@ -48,7 +48,7 @@ BattleRenderer::BattleRenderer(Battle* battle) : mBattle(battle)
 		for (int j = 0; j < 6; j++)
 		{
 			mPokemonNames[i][j] = new Texture(gFont, mBattle->getPokemon(i, j)->mName, createSDLColor(255, 255, 255));
-
+			mPokemonLvlText[i][j] = new Texture(gFontSmall, "Lv." + std::to_string(mBattle->getPokemon(i, j)->mLevel), createSDLColor(255, 255, 255));
 			for (int k = 0; k < STAT_NUM; k++)
 			{
 				mPokemonStatText[i][j][k] = new Texture();
@@ -135,14 +135,17 @@ void BattleRenderer::render(SDL_Surface* surface)
 
 			mPokemonMap->render(32 * p->mX, 32 * p->mY, &r);
 
-			//Side pic
+			//Picture
 			mSideButtons[i][j]->render();
 			mPokemonNames[i][j]->render(460, 35 * j + 250 * i);
-
-			//Side hp
-			std::string hp_string = std::to_string(int(p->mCurrentHP)) + "/" + std::to_string(int(p->mStats[STAT_HP]));
+			
+			//HP
+			std::string hp_string = "HP:" + std::to_string(int(p->mCurrentHP)) + "/" + std::to_string(int(p->mStats[STAT_HP]));
 			mPokemonStatText[i][j][STAT_HP]->loadFromText(gFontSmall, hp_string, createSDLColor(255, 255, 255));
-			mPokemonStatText[i][j][STAT_HP]->render(460, 35 * j + 250 * i + 15);
+			mPokemonStatText[i][j][STAT_HP]->render(515, 35 * j + 250 * i + 15);
+
+			//Lvl
+			mPokemonLvlText[i][j]->render(460, 35 * j + 250 * i + 15);
 		}
 	}
 
@@ -166,8 +169,8 @@ void BattleRenderer::render(SDL_Surface* surface)
 		
 		//Name and HP
 		mPokemonNames[mSelectedPokemonTrainer][mSelectedPokemonNum]->render(100, 425);
-		mHPText->render(100, 442);
-		mPokemonStatText[mSelectedPokemonTrainer][mSelectedPokemonNum][STAT_HP]->render(121, 442);
+		//mHPText->render(100, 442);
+		mPokemonStatText[mSelectedPokemonTrainer][mSelectedPokemonNum][STAT_HP]->render(100, 442);
 
 		//Types
 		r.x = 32 * p->mPrimaryType;
@@ -241,6 +244,8 @@ void BattleRenderer::handleEvent(SDL_Event e)
 					{
 						mSelectedPokemonNum = j;
 						mSelectedPokemonTrainer = i;
+						mSelectFrame = 0;
+						mTimer.restart();
 						flag = 1;
 					}
 				}
@@ -248,7 +253,7 @@ void BattleRenderer::handleEvent(SDL_Event e)
 
 			if (flag == 0 && mSelectedPokemonNum != -1)
 			{
-				mBattle->move(mSelectedPokemonTrainer, mSelectedPokemonNum, tx, ty);
+				mBattle->attemptMove(mSelectedPokemonTrainer, mSelectedPokemonNum, tx, ty);
 			}
 		}
 	}

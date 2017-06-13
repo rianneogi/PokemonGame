@@ -27,6 +27,7 @@ public:
 	Button* mSideButtons[2][6];
 	Texture* mPokemonNames[2][6];
 	Texture* mPokemonStatText[2][6][STAT_NUM];
+	Texture* mPokemonLvlText[2][6];
 	Texture* mHPText;
 
 	Timer mTimer;

@@ -7,7 +7,7 @@ Battle::Battle(Trainer* t1, Trainer* t2)
 	{
 		for (int j = 0; j < 13; j++)
 		{
-			getTile(i, j) = 0;
+			getTile(i, j) = TILE_GRASS;
 		}
 	}
 	mTrainers[0] = t1;
@@ -18,12 +18,14 @@ Battle::Battle(Trainer* t1, Trainer* t2)
 		t1->mPokemon[i]->mFacing = FACING_DOWN;
 		t1->mPokemon[i]->mX = 1 + i * 2;
 		t1->mPokemon[i]->mY = 1;
+		t1->mPokemon[i]->mHasMoved = 0;
 	}
 	for (int i = 0; i < t2->mPokemon.size(); i++)
 	{
 		t2->mPokemon[i]->mFacing = FACING_UP;
 		t2->mPokemon[i]->mX = 1 + i * 2;
 		t2->mPokemon[i]->mY = 11;
+		t1->mPokemon[i]->mHasMoved = 0;
 	}
 }
 
@@ -47,11 +49,11 @@ int& Battle::getTile(int i, int j)
 	return mTiles[i * 13 + j];
 }
 
-bool Battle::move(int trainer, int num, int x, int y)
+bool Battle::attemptMove(int trainer, int num, int x, int y)
 {
 	Pokemon* p = getPokemon(trainer, num);
 
-	if (trainer != mTurn) //not your turn
+	if (trainer != mTurn || p->mHasMoved == 1)
 	{
 		return false;
 	}
@@ -71,8 +73,44 @@ bool Battle::move(int trainer, int num, int x, int y)
 	{
 		p->mX = x;
 		p->mY = y;
+		p->mHasMoved = 1;
+		checkTurn();
 		return true;
 	}
 	return false;
+}
+
+bool Battle::attemptAttack(int trainer, int num, int attack_id, int target)
+{
+	return false;
+}
+
+void Battle::checkTurn()
+{
+	int flag = 0;
+	for (int j = 0; j < 6; j++)
+	{
+		if (getPokemon(mTurn, j)->mHasMoved == 0)
+		{
+			flag = 1;
+			break;
+		}
+	}
+	if (flag == 0)
+	{
+		mTurn = (mTurn + 1) % 2;
+		resetPokemon();
+	}
+}
+
+void Battle::resetPokemon()
+{
+	for (int i = 0; i < 2; i++)
+	{
+		for (int j = 0; j < 6; j++)
+		{
+			getPokemon(i, j)->mHasMoved = 0;
+		}
+	}
 }
 
