@@ -36,7 +36,7 @@ int initPokemon()
 
 	if (luaL_loadfile(LuaPokemon, "Lua\\Pokemon.lua") || lua_pcall(LuaPokemon, 0, 0, 0))
 	{
-		std::cout << "Error: failed to load Cards.lua" << std::endl;
+		std::cout << "Error: failed to load Pokemon.lua" << std::endl;
 		std::cout << lua_tostring(LuaPokemon, -1) << "\n";
 		//_getch();
 		return -1;
@@ -55,7 +55,7 @@ int initPokemon()
 		d.Name = lua_tostring(LuaPokemon, -1);
 		lua_pop(LuaPokemon, 1);
 
-		printf("Loading %s\n", d.Name);
+		printf("Loading Pokemon: %s\n", d.Name);
 
 		//Type
 		lua_getfield(LuaPokemon, -1, "Types");

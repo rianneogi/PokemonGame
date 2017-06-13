@@ -1,10 +1,8 @@
 #pragma once
 
-#include "Include.h"
+#include "AttackData.h"
 
-enum TargetType { TARGET_NONE, TARGET_UNIT, TARGET_GROUND, TARGET_NUM };
-
-void registerLua(lua_State* L);
+extern lua_State* LuaAbility;
 
 class AbilityData
 {
@@ -12,7 +10,6 @@ public:
 	std::string Name;
 	int ID;
 
-	int TargetType;
 	std::string Description;
 
 	AbilityData() {}

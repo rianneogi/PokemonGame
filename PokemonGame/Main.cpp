@@ -129,6 +129,7 @@ void init()
 		printf("Failed to load font! SDL_ttf Error: %s\n", TTF_GetError());
 	}
 
+	initAttacks();
 	initPokemon();
 }
 
