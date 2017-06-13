@@ -21,7 +21,7 @@ public:
 	Texture* mPokemonSelect2;
 	Texture* mTypeTexture;
 
-	int mSelectedPokemonID;
+	int mSelectedPokemonNum;
 	int mSelectedPokemonTrainer;
 
 	Button* mSideButtons[2][6];

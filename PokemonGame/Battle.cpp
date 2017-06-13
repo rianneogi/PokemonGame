@@ -50,6 +50,23 @@ int& Battle::getTile(int i, int j)
 bool Battle::move(int trainer, int num, int x, int y)
 {
 	Pokemon* p = getPokemon(trainer, num);
+
+	if (trainer != mTurn) //not your turn
+	{
+		return false;
+	}
+
+	for (int i = 0; i < 2; i++)
+	{
+		for (int j = 0; j < 6; j++)
+		{
+			if (getPokemon(i, j)->mX == x && getPokemon(i, j)->mY == y) //target location is occupied
+			{
+				return false;
+			}
+		}
+	}
+
 	if (abs(p->mX - x) <= p->mMovement && abs(p->mY - y) <= p->mMovement)
 	{
 		p->mX = x;

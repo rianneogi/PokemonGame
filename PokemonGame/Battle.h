@@ -9,8 +9,10 @@ class Battle
 public:
 	Trainer* mTrainers[2];
 
-	unsigned int mSelf;
-	unsigned int mTarget;
+	int mTurn;
+
+	int mSelf;
+	int mTarget;
 
 	int* mTiles;
 

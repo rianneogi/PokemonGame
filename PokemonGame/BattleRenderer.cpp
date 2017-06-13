@@ -22,7 +22,7 @@ BattleRenderer::BattleRenderer(Battle* battle) : mBattle(battle)
 	mHPText = new Texture(gFontSmall, "HP: ", createSDLColor(255, 255, 255));
 
 	mSelectedPokemonTrainer = -1;
-	mSelectedPokemonID = -1;
+	mSelectedPokemonNum = -1;
 
 	mTimer = Timer();
 	mSelectFrame = 0;
@@ -146,9 +146,9 @@ void BattleRenderer::render(SDL_Surface* surface)
 		}
 	}
 
-	if (mSelectedPokemonID != -1)
+	if (mSelectedPokemonNum != -1)
 	{
-		Pokemon* p = mBattle->getPokemon(mSelectedPokemonTrainer, mSelectedPokemonID);
+		Pokemon* p = mBattle->getPokemon(mSelectedPokemonTrainer, mSelectedPokemonNum);
 
 		//Picture
 		r.x = ((p->mSpecies) % 25) * 80;
@@ -165,9 +165,9 @@ void BattleRenderer::render(SDL_Surface* surface)
 		}
 		
 		//Name and HP
-		mPokemonNames[mSelectedPokemonTrainer][mSelectedPokemonID]->render(100, 425);
+		mPokemonNames[mSelectedPokemonTrainer][mSelectedPokemonNum]->render(100, 425);
 		mHPText->render(100, 442);
-		mPokemonStatText[mSelectedPokemonTrainer][mSelectedPokemonID][STAT_HP]->render(121, 442);
+		mPokemonStatText[mSelectedPokemonTrainer][mSelectedPokemonNum][STAT_HP]->render(121, 442);
 
 		//Types
 		r.x = 32 * p->mPrimaryType;
@@ -194,8 +194,8 @@ void BattleRenderer::render(SDL_Surface* surface)
 				stat_string += " ";
 			}
 			stat_string += ": " + std::to_string(int(p->mStats[i]));
-			mPokemonStatText[mSelectedPokemonTrainer][mSelectedPokemonID][i]->loadFromText(gFontSmall, stat_string, createSDLColor(255, 255, 255));
-			mPokemonStatText[mSelectedPokemonTrainer][mSelectedPokemonID][i]->render(200, 439 + 20*i);
+			mPokemonStatText[mSelectedPokemonTrainer][mSelectedPokemonNum][i]->loadFromText(gFontSmall, stat_string, createSDLColor(255, 255, 255));
+			mPokemonStatText[mSelectedPokemonTrainer][mSelectedPokemonNum][i]->render(200, 439 + 20*i);
 		}
 	}
 }
@@ -220,10 +220,35 @@ void BattleRenderer::handleEvent(SDL_Event e)
 				if (mSideButtons[i][j]->checkCollision(e.button.x, e.button.y))
 				{
 					mSelectedPokemonTrainer = i;
-					mSelectedPokemonID = j;
+					mSelectedPokemonNum = j;
 					mSelectFrame = 0;
 					mTimer.restart();
 				}
+			}
+		}
+
+		if (e.button.x >= 0 && e.button.x <= 32 * 13 && e.button.y >= 0 && e.button.y <= 32 * 13)
+		{
+			int tx = e.button.x / 32;
+			int ty = e.button.y / 32;
+
+			int flag = 0;
+			for (int i = 0; i < 2; i++)
+			{
+				for (int j = 0; j < 6; j++)
+				{
+					if (mBattle->getPokemon(i, j)->mX == tx && mBattle->getPokemon(i, j)->mY == ty)
+					{
+						mSelectedPokemonNum = j;
+						mSelectedPokemonTrainer = i;
+						flag = 1;
+					}
+				}
+			}
+
+			if (flag == 0 && mSelectedPokemonNum != -1)
+			{
+				mBattle->move(mSelectedPokemonTrainer, mSelectedPokemonNum, tx, ty);
 			}
 		}
 	}
