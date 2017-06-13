@@ -30,6 +30,9 @@ public:
 	Texture* mPokemonLvlText[2][6];
 	Texture* mHPText;
 
+	Texture* mMoveTextures[2][6][4];
+	Button* mMoveButtons[2][6][4];
+
 	Timer mTimer;
 	int mSelectFrame;
 

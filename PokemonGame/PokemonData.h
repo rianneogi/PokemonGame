@@ -11,6 +11,15 @@ TYPE_WATER, TYPE_GRASS, TYPE_ELECTRIC, TYPE_PSYCHIC, TYPE_ICE, TYPE_DRAGON, TYPE
 
 extern float gTypeEffectiveness[TYPE_NUM][TYPE_NUM];
 
+struct AttackLearn
+{
+	std::string AttackName;
+	int Level;
+
+	AttackLearn() : AttackName(""), Level(1) {}
+	AttackLearn(std::string atk, int lvl) : AttackName(atk), Level(lvl) {}
+};
+
 class PokemonData
 {
 public:
@@ -22,6 +31,8 @@ public:
 	
 	double BaseStats[STAT_NUM];
 	double StatGains[STAT_NUM];
+
+	std::vector<AttackLearn> AttacksLearnt;
 
 	PokemonData() {}
 	~PokemonData() {}

@@ -1,8 +1,8 @@
 #pragma once
 
-#include "Attack.h"
+#include "StatusEffect.h"
 
-class Ability
+class Attack
 {
 public:
 	std::string mName;
@@ -12,10 +12,9 @@ public:
 	int mTargetMode;
 	std::string mDescription;
 
-	Ability();
-	Ability(unsigned int id);
-	~Ability();
+	Attack();
+	Attack(std::string name);
+	~Attack();
 
 	void use();
 };
-

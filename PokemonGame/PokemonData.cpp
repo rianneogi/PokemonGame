@@ -127,6 +127,33 @@ int initPokemon()
 		d.StatGains[STAT_SPEED] = lua_tonumber(LuaPokemon, -1);
 		lua_pop(LuaPokemon, 1);
 
+		//Attacks
+		lua_getfield(LuaPokemon, -1, "Abilities");
+		lua_len(LuaPokemon, -1);
+		int attacks_len = luaL_checkinteger(LuaPokemon, -1);
+		lua_pop(LuaPokemon, 1);
+
+		for (int j = 1; j <= attacks_len; j++)
+		{
+			lua_rawgeti(LuaPokemon, -1, j);
+
+			lua_rawgeti(LuaPokemon, -1, 1);
+			std::string attack_name = lua_tostring(LuaPokemon, -1);
+			lua_pop(LuaPokemon, 1);
+
+			lua_rawgeti(LuaPokemon, -1, 2);
+			int learn_lvl = lua_tointeger(LuaPokemon, -1);
+			lua_pop(LuaPokemon, 1);
+
+			AttackLearn atk(attack_name, learn_lvl);
+			d.AttacksLearnt.push_back(atk);
+
+			printf("	has ability: %s %d\n", attack_name, learn_lvl);
+
+			lua_pop(LuaPokemon, 1);
+		}
+		lua_pop(LuaPokemon, 1);
+
 		lua_pop(LuaPokemon, 1);
 		
 		PokemonDatabase.push_back(d);

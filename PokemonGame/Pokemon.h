@@ -19,7 +19,7 @@ public:
 	float mStats[STAT_NUM];
 	float mStatGains[STAT_NUM];
 
-	std::vector<Ability> mAbilities;
+	std::vector<Attack> mAttacks;
 
 	float mCurrentHP;
 	int mAccuracy;

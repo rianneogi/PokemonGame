@@ -20,6 +20,11 @@ Pokemon::Pokemon(int species, int level) : mSpecies(species), mLevel(level)
 
 	mPrimaryType = PokemonDatabase[species].PrimaryType;
 	mSecondaryType = PokemonDatabase[species].SecondaryType;
+
+	for (int i = 0; i < 4; i++)
+	{
+		mAttacks.push_back(Attack(PokemonDatabase[species].AttacksLearnt[i].AttackName));
+	}
 }
 
 Pokemon::~Pokemon()

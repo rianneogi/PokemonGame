@@ -1,6 +1,6 @@
 Attacks = {}
 
-Attacks["Tackle"] = {
+Attacks[1] = {
 	Name = "Tackle",
 	Description = "Tackles enemy",
 
@@ -16,7 +16,7 @@ Attacks["Tackle"] = {
 	end
 }
 
-Attacks["Leech Seed"] = {
+Attacks[2] = {
 	Name = "Leech Seed",
 	Description = "Tackles enemy",
 
@@ -33,7 +33,7 @@ Attacks["Leech Seed"] = {
 	end
 }
 
-Attacks["Razor Leaf"] = {
+Attacks[3] = {
 	Name = "Razor Leaf",
 	Description = "Tackles enemy",
 
@@ -49,7 +49,7 @@ Attacks["Razor Leaf"] = {
 	end
 }
 
-Attacks["Vine Whip"] = {
+Attacks[4] = {
 	Name = "Vine Whip",
 	Description = "Tackles enemy",
 

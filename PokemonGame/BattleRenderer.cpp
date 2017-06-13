@@ -47,11 +47,21 @@ BattleRenderer::BattleRenderer(Battle* battle) : mBattle(battle)
 	{
 		for (int j = 0; j < 6; j++)
 		{
-			mPokemonNames[i][j] = new Texture(gFont, mBattle->getPokemon(i, j)->mName, createSDLColor(255, 255, 255));
-			mPokemonLvlText[i][j] = new Texture(gFontSmall, "Lv." + std::to_string(mBattle->getPokemon(i, j)->mLevel), createSDLColor(255, 255, 255));
+			Pokemon* p = mBattle->getPokemon(i, j);
+
+			mPokemonNames[i][j] = new Texture(gFont, p->mName, createSDLColor(255, 255, 255));
+			mPokemonLvlText[i][j] = new Texture(gFontSmall, "Lv." + std::to_string(p->mLevel), createSDLColor(255, 255, 255));
 			for (int k = 0; k < STAT_NUM; k++)
 			{
 				mPokemonStatText[i][j][k] = new Texture();
+			}
+			for (int k = 0; k < 4; k++)
+			{
+				mMoveTextures[i][j][k] = new Texture(gFont, p->mAttacks[k].mName, createSDLColor(255, 255, 255));
+
+				mMoveButtons[i][j][k] = new Button(mMoveTextures[i][j][k], 
+					createSDLRect(100, 475 + 20 * k, mMoveTextures[i][j][k]->mWidth, mMoveTextures[i][j][k]->mHeight),
+					createSDLRect(0, 0, mMoveTextures[i][j][k]->mWidth, mMoveTextures[i][j][k]->mHeight));
 			}
 		}
 	}
@@ -199,6 +209,12 @@ void BattleRenderer::render(SDL_Surface* surface)
 			stat_string += ": " + std::to_string(int(p->mStats[i]));
 			mPokemonStatText[mSelectedPokemonTrainer][mSelectedPokemonNum][i]->loadFromText(gFontSmall, stat_string, createSDLColor(255, 255, 255));
 			mPokemonStatText[mSelectedPokemonTrainer][mSelectedPokemonNum][i]->render(200, 439 + 20*i);
+		}
+
+		//Abilities
+		for (int i = 0; i < 4; i++)
+		{
+			mMoveButtons[mSelectedPokemonTrainer][mSelectedPokemonNum][i]->render();
 		}
 	}
 }
