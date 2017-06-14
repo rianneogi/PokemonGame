@@ -24,13 +24,21 @@ static int dealDamage(lua_State* L)
 	Pokemon* attacker = gCurrentBattle->getPokemon(atker_id);
 	Pokemon* defender = gCurrentBattle->getPokemon(dfnder_id);
 
-	float dmg = pow * attacker->mStats[STAT_ATK] / defender->mStats[STAT_DEF];
-	dmg *= gTypeEffectiveness[type][defender->mPrimaryType] * gTypeEffectiveness[type][defender->mSecondaryType];
+	printf("Pow: %d\n", pow);
+
+	float dmg = pow * (attacker->mStats[STAT_ATK] / defender->mStats[STAT_DEF]);
+	printf("first pass: %f\n", dmg);
+	dmg *= gTypeEffectiveness[type][defender->mPrimaryType];
+	if (defender->mSecondaryType != -1)
+	{
+		dmg *= gTypeEffectiveness[type][defender->mSecondaryType];
+	}
+	printf("scnd pass: %f\n", dmg);
 	if (type == attacker->mPrimaryType || type == attacker->mSecondaryType)
 	{
 		dmg *= 1.33; //STAB bonus
 	}
-
+	printf("dmg dealt: %f\n", dmg);
 	defender->mCurrentHP -= dmg;
 	return 0;
 }
@@ -46,7 +54,7 @@ static int applyStatus(lua_State* L)
 	Pokemon* attacker = gCurrentBattle->getPokemon(atker_id);
 	Pokemon* defender = gCurrentBattle->getPokemon(dfnder_id);
 
-	float strength = pow * attacker->mStats[STAT_SPATK] / defender->mStats[STAT_SPDEF];
+	float strength = pow * (attacker->mStats[STAT_SPATK] / defender->mStats[STAT_SPDEF]);
 	strength *= gTypeEffectiveness[type][defender->mPrimaryType] * gTypeEffectiveness[type][defender->mSecondaryType];
 	if (type == attacker->mPrimaryType || type == attacker->mSecondaryType)
 	{
@@ -81,16 +89,17 @@ static int heal(lua_State* L)
 }
 
 
-static int getAttackingPokemon(lua_State* L)
+static int getAttacker(lua_State* L)
 {
-	lua_pushinteger(L, gCurrentBattle->mSelf);
+	lua_pushinteger(L, gCurrentBattle->mAttackerID);
 	return 1;
 }
 
 static int getAttackTarget(lua_State* L)
 {
-	lua_pushinteger(L, gCurrentBattle->mTarget);
-	return 1;
+	lua_pushinteger(L, gCurrentBattle->mTargetX);
+	lua_pushinteger(L, gCurrentBattle->mTargetY);
+	return 2;
 }
 
 static int isTileOccupied(lua_State* L)
@@ -200,11 +209,13 @@ void registerLua(lua_State* L)
 	lua_register(L, "printstr", printstr);
 	lua_register(L, "printint", printint);
 
-	lua_register(L, "getAttackingPokemon", getAttackingPokemon);
-	lua_register(L, "getAttackTarget", getAttackTarget);
 	lua_register(L, "dealDamage", dealDamage);
+	lua_register(L, "applyStatus", applyStatus);
+	lua_register(L, "move", move);
 	lua_register(L, "heal", heal);
 
+	lua_register(L, "getAttacker", getAttacker);
+	lua_register(L, "getAttackTarget", getAttackTarget);
 	lua_register(L, "isTileOccupied", isTileOccupied);
 	lua_register(L, "getPokemonPos", getPokemonPos);
 	lua_register(L, "getPokemonAt", getPokemonAt);

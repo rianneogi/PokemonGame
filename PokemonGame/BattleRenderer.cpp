@@ -23,6 +23,7 @@ BattleRenderer::BattleRenderer(Battle* battle) : mBattle(battle)
 
 	mSelectedPokemonTrainer = -1;
 	mSelectedPokemonNum = -1;
+	mSelectedAbility = -1;
 
 	mTimer = Timer();
 	mSelectFrame = 0;
@@ -241,6 +242,7 @@ void BattleRenderer::handleEvent(SDL_Event e)
 					mSelectedPokemonTrainer = i;
 					mSelectedPokemonNum = j;
 					mSelectFrame = 0;
+					mSelectedAbility = -1;
 					mTimer.restart();
 				}
 			}
@@ -251,25 +253,46 @@ void BattleRenderer::handleEvent(SDL_Event e)
 			int tx = e.button.x / 32;
 			int ty = e.button.y / 32;
 
-			int flag = 0;
-			for (int i = 0; i < 2; i++)
+			if (mSelectedAbility != -1) //Attack
 			{
-				for (int j = 0; j < 6; j++)
+				mBattle->attemptAttack(mSelectedPokemonTrainer, mSelectedPokemonNum, mSelectedAbility, tx, ty);
+				printf("%d %d attacked %d %d with %d!\n", mSelectedPokemonTrainer, mSelectedPokemonNum, tx, ty, mSelectedAbility);
+				mSelectedAbility = -1;
+			}
+			else
+			{
+				int flag = 0;
+				for (int i = 0; i < 2; i++)
 				{
-					if (mBattle->getPokemon(i, j)->mX == tx && mBattle->getPokemon(i, j)->mY == ty)
+					for (int j = 0; j < 6; j++)
 					{
-						mSelectedPokemonNum = j;
-						mSelectedPokemonTrainer = i;
-						mSelectFrame = 0;
-						mTimer.restart();
-						flag = 1;
+						if (mBattle->getPokemon(i, j)->mX == tx && mBattle->getPokemon(i, j)->mY == ty) //Select on board
+						{
+							mSelectedPokemonNum = j;
+							mSelectedPokemonTrainer = i;
+							mSelectFrame = 0;
+							mSelectedAbility = -1;
+							mTimer.restart();
+							flag = 1;
+						}
 					}
 				}
-			}
 
-			if (flag == 0 && mSelectedPokemonNum != -1)
+				if (flag == 0 && mSelectedPokemonNum != -1) //Move
+				{
+					mBattle->attemptMove(mSelectedPokemonTrainer, mSelectedPokemonNum, tx, ty);
+				}
+			}
+		}
+
+		if (mSelectedPokemonNum != -1)
+		{
+			for (int i = 0; i < 4; i++)
 			{
-				mBattle->attemptMove(mSelectedPokemonTrainer, mSelectedPokemonNum, tx, ty);
+				if (mMoveButtons[mSelectedPokemonTrainer][mSelectedPokemonNum][i]->checkCollision(e.button.x, e.button.y))
+				{
+					mSelectedAbility = i;
+				}
 			}
 		}
 	}

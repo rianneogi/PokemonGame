@@ -11,8 +11,9 @@ public:
 
 	int mTurn;
 
-	int mSelf;
-	int mTarget;
+	int mAttackerID;
+	int mTargetX;
+	int mTargetY;
 
 	int* mTiles;
 
@@ -21,11 +22,12 @@ public:
 
 	Pokemon* getPokemon(int id);
 	Pokemon* getPokemon(int trainer, int num);
+	int getPokemonID(int trainer, int num);
 	int getPokemonAt(int x, int y);
 	int& getTile(int i, int j);
 
 	bool attemptMove(int trainer, int num, int x, int y);
-	bool attemptAttack(int trainer, int num, int attack_id, int target);
+	bool attemptAttack(int trainer, int num, int attack_id, int targetx, int targety);
 
 	void checkTurn();
 	void checkDead();

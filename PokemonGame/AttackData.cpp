@@ -25,6 +25,7 @@ int initAttacks()
 	for (int i = 0; i < ATTACK_NUM; i++)
 	{
 		AttackData d;
+		d.ID = i;
 
 		lua_rawgeti(LuaAttacks, -1, i + 1);
 

@@ -23,6 +23,7 @@ public:
 
 	int mSelectedPokemonNum;
 	int mSelectedPokemonTrainer;
+	int mSelectedAbility;
 
 	Button* mSideButtons[2][6];
 	Texture* mPokemonNames[2][6];

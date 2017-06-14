@@ -17,6 +17,7 @@ Attack::Attack(std::string name)
 			mDescription = AttackDatabase[i].Description;
 			mType = AttackDatabase[i].Type;
 			mName = name;
+			flag = 1;
 		}
 	}
 	if (flag == 0)
@@ -29,10 +30,11 @@ Attack::~Attack()
 {
 }
 
-void Attack::onCast()
+void Attack::onUse()
 {
 	lua_getglobal(LuaAttacks, "Attacks");
 	lua_rawgeti(LuaAttacks, -1, mID + 1);
-	lua_getfield(LuaAttaks, -1, "OnUse");
+	lua_getfield(LuaAttacks, -1, "OnUse");
 	lua_pcall(LuaAttacks, 0, 0, 0);
+	lua_pop(LuaAttacks, 3);
 }

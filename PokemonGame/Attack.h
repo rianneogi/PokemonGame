@@ -16,5 +16,5 @@ public:
 	Attack(std::string name);
 	~Attack();
 
-	void onCast();
+	void onUse();
 };

@@ -44,6 +44,11 @@ Pokemon* Battle::getPokemon(int trainer, int num)
 	return mTrainers[trainer]->mPokemon[num];
 }
 
+int Battle::getPokemonID(int trainer, int num)
+{
+	return (6*trainer + num);
+}
+
 int Battle::getPokemonAt(int x, int y)
 {
 	for (int i = 0; i < 12; i++)
@@ -93,9 +98,15 @@ bool Battle::attemptMove(int trainer, int num, int x, int y)
 	return false;
 }
 
-bool Battle::attemptAttack(int trainer, int num, int attack_id, int target)
+bool Battle::attemptAttack(int trainer, int num, int attack_id, int targetx, int targety)
 {
-	return false;
+	mAttackerID = getPokemonID(trainer, num);
+	mTargetX = targetx;
+	mTargetY = targety;
+
+	getPokemon(trainer, num)->mAttacks[attack_id].onUse();
+
+	return true;
 }
 
 void Battle::checkTurn()
@@ -126,6 +137,7 @@ void Battle::checkDead()
 			if (getPokemon(i, j)->mCurrentHP <= 0)
 			{
 				getPokemon(i, j)->mIsDead = 1;
+				getPokemon(i, j)->mCurrentHP = 0;
 			}
 		}
 	}

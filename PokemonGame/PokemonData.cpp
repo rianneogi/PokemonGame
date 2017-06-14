@@ -47,6 +47,7 @@ int initPokemon()
 	for (int i = 0; i < POKEMON_NUM; i++)
 	{
 		PokemonData d;
+		d.Species = i;
 
 		lua_rawgeti(LuaPokemon, -1, i+1);
 
