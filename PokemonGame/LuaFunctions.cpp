@@ -14,18 +14,6 @@ static int printint(lua_State* L)
 	return 0;
 }
 
-static int getSelf(lua_State* L)
-{
-	lua_pushinteger(L, gCurrentBattle->mSelf);
-	return 1;
-}
-
-static int getTarget(lua_State* L)
-{
-	lua_pushinteger(L, gCurrentBattle->mTarget);
-	return 1;
-}
-
 static int dealDamage(lua_State* L)
 {
 	int atker_id = lua_tointeger(L, 1);
@@ -92,13 +80,138 @@ static int heal(lua_State* L)
 	return -1;
 }
 
+
+static int getAttackingPokemon(lua_State* L)
+{
+	lua_pushinteger(L, gCurrentBattle->mSelf);
+	return 1;
+}
+
+static int getAttackTarget(lua_State* L)
+{
+	lua_pushinteger(L, gCurrentBattle->mTarget);
+	return 1;
+}
+
+static int isTileOccupied(lua_State* L)
+{
+	int x = lua_tointeger(L, 1);
+	int y = lua_tointeger(L, 2);
+
+	if (gCurrentBattle->getPokemonAt(x, y) == -1)
+	{
+		lua_pushinteger(L, 0);
+	}
+	else
+	{
+		lua_pushinteger(L, 1);
+	}
+
+	return 1;
+}
+
+static int getPokemonPos(lua_State* L)
+{
+	int pid = lua_tointeger(L, 1);
+
+	lua_pushinteger(L, gCurrentBattle->getPokemon(pid)->mX);
+	lua_pushinteger(L, gCurrentBattle->getPokemon(pid)->mY);
+
+	return 2;
+}
+
+static int getPokemonAt(lua_State* L)
+{
+	int x = lua_tointeger(L, 1);
+	int y = lua_tointeger(L, 2);
+
+	lua_pushinteger(L, gCurrentBattle->getPokemonAt(x, y));
+
+	return 1;
+}
+
+static int getPokemonSpecies(lua_State* L)
+{
+	int pid = lua_tointeger(L, 1);
+
+	lua_pushinteger(L, gCurrentBattle->getPokemon(pid)->mSpecies);
+
+	return 1;
+}
+
+static int getPokemonCurrentHP(lua_State* L)
+{
+	int pid = lua_tointeger(L, 1);
+
+	lua_pushinteger(L, gCurrentBattle->getPokemon(pid)->mCurrentHP);
+
+	return 1;
+}
+
+static int getPokemonStat(lua_State* L)
+{
+	int pid = lua_tointeger(L, 1);
+	int stat_id = lua_tointeger(L, 2);
+
+	lua_pushinteger(L, gCurrentBattle->getPokemon(pid)->mStats[stat_id]);
+
+	return 1;
+}
+
+static int getPokemonStatGain(lua_State* L)
+{
+	int pid = lua_tointeger(L, 1);
+	int stat_id = lua_tointeger(L, 2);
+
+	lua_pushinteger(L, gCurrentBattle->getPokemon(pid)->mStatGains[stat_id]);
+
+	return 1;
+}
+
+static int getPokemonHasMoved(lua_State* L)
+{
+	int pid = lua_tointeger(L, 1);
+
+	lua_pushinteger(L, gCurrentBattle->getPokemon(pid)->mHasMoved);
+
+	return 1;
+}
+
+static int getPokemonHasAttacked(lua_State* L)
+{
+	int pid = lua_tointeger(L, 1);
+
+	lua_pushinteger(L, gCurrentBattle->getPokemon(pid)->mHasAttacked);
+
+	return 1;
+}
+
+static int getPokemonIsDead(lua_State* L)
+{
+	int pid = lua_tointeger(L, 1);
+
+	lua_pushinteger(L, gCurrentBattle->getPokemon(pid)->mIsDead);
+
+	return 1;
+}
+
 void registerLua(lua_State* L)
 {
 	lua_register(L, "printstr", printstr);
 	lua_register(L, "printint", printint);
 
-	lua_register(L, "getSelf", getSelf);
-	lua_register(L, "getTarget", getTarget);
+	lua_register(L, "getAttackingPokemon", getAttackingPokemon);
+	lua_register(L, "getAttackTarget", getAttackTarget);
 	lua_register(L, "dealDamage", dealDamage);
 	lua_register(L, "heal", heal);
+
+	lua_register(L, "isTileOccupied", isTileOccupied);
+	lua_register(L, "getPokemonPos", getPokemonPos);
+	lua_register(L, "getPokemonAt", getPokemonAt);
+	lua_register(L, "getPokemonCurrentHP", getPokemonCurrentHP);
+	lua_register(L, "getPokemonStat", getPokemonStat);
+	lua_register(L, "getPokemonStatGain", getPokemonStatGain);
+	lua_register(L, "getPokemonHasMoved", getPokemonHasMoved);
+	lua_register(L, "getPokemonHasAttacked", getPokemonHasAttacked);
+	lua_register(L, "getPokemonIsDead", getPokemonIsDead);
 }

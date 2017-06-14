@@ -9,12 +9,12 @@ public:
 	int mID;
 	int mType;
 
-	int mTargetMode;
+	int mTargetCount;
 	std::string mDescription;
 
 	Attack();
 	Attack(std::string name);
 	~Attack();
 
-	void use();
+	void onCast();
 };

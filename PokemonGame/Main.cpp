@@ -170,6 +170,7 @@ int main(int argc, char* args[])
 
 	Battle* b = new Battle(t1, t2);
 	mBattleRenderer = new BattleRenderer(b);
+	gCurrentBattle = b;
 
 	World* w = new World();
 	mWorldRenderer = new WorldRenderer(w);

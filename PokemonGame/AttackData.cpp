@@ -42,7 +42,7 @@ int initAttacks()
 
 		//Target Mode
 		lua_getfield(LuaAttacks, -1, "TargetMode");
-		d.TargetMode = lua_tointeger(LuaAttacks, -1);
+		d.TargetCount = lua_tointeger(LuaAttacks, -1);
 		lua_pop(LuaAttacks, 1);
 
 		//Description

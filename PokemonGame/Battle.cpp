@@ -18,15 +18,15 @@ Battle::Battle(Trainer* t1, Trainer* t2)
 		t1->mPokemon[i]->mFacing = FACING_DOWN;
 		t1->mPokemon[i]->mX = 1 + i * 2;
 		t1->mPokemon[i]->mY = 1;
-		t1->mPokemon[i]->mHasMoved = 0;
 	}
 	for (int i = 0; i < t2->mPokemon.size(); i++)
 	{
 		t2->mPokemon[i]->mFacing = FACING_UP;
 		t2->mPokemon[i]->mX = 1 + i * 2;
 		t2->mPokemon[i]->mY = 11;
-		t1->mPokemon[i]->mHasMoved = 0;
 	}
+
+	resetPokemon();
 }
 
 Battle::~Battle()
@@ -42,6 +42,19 @@ Pokemon* Battle::getPokemon(int id)
 Pokemon* Battle::getPokemon(int trainer, int num)
 {
 	return mTrainers[trainer]->mPokemon[num];
+}
+
+int Battle::getPokemonAt(int x, int y)
+{
+	for (int i = 0; i < 12; i++)
+	{
+		Pokemon* p = getPokemon(i);
+		if (p->mX == x && p->mY == y)
+		{
+			return i;
+		}
+	}
+	return -1;
 }
 
 int& Battle::getTile(int i, int j)
@@ -90,7 +103,8 @@ void Battle::checkTurn()
 	int flag = 0;
 	for (int j = 0; j < 6; j++)
 	{
-		if (getPokemon(mTurn, j)->mHasMoved == 0)
+		Pokemon* p = getPokemon(mTurn, j);
+		if (p->mIsDead==0 && (p->mHasMoved == 0 || p->mHasAttacked == 0))
 		{
 			flag = 1;
 			break;
@@ -103,6 +117,20 @@ void Battle::checkTurn()
 	}
 }
 
+void Battle::checkDead()
+{
+	for (int i = 0; i < 2; i++)
+	{
+		for (int j = 0; j < 6; j++)
+		{
+			if (getPokemon(i, j)->mCurrentHP <= 0)
+			{
+				getPokemon(i, j)->mIsDead = 1;
+			}
+		}
+	}
+}
+
 void Battle::resetPokemon()
 {
 	for (int i = 0; i < 2; i++)
@@ -110,6 +138,7 @@ void Battle::resetPokemon()
 		for (int j = 0; j < 6; j++)
 		{
 			getPokemon(i, j)->mHasMoved = 0;
+			getPokemon(i, j)->mHasAttacked = 0;
 		}
 	}
 }

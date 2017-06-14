@@ -29,6 +29,8 @@ public:
 	int mFacing;
 
 	int mHasMoved;
+	int mHasAttacked;
+	int mIsDead;
 
 	std::vector<StatusEffect> mStatusEffects;
 

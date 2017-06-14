@@ -5,13 +5,13 @@ Attacks[1] = {
 	Description = "Tackles enemy",
 
 	Type = TYPE_NORMAL,
-	TargetMode = TARGET_YES,
+	TargetCount = 1,
 
-	CanCast = function()
+	CheckTarget = function()
 		return 1
 	end,
 
-	Execute = function()
+	OnUse = function()
 		dealDamage(getOpponent(), 3, TYPE_NORMAL)
 	end
 }
@@ -21,13 +21,13 @@ Attacks[2] = {
 	Description = "Tackles enemy",
 
 	Type = TYPE_GRASS,
-	TargetMode = TARGET_YES,
+	TargetCount = 1,
 
-	CanCast = function()
+	CheckTarget = function()
 		return 1
 	end,
 
-	Execute = function()
+	OnUse = function()
 		dealDamage(getOpponent(), 3, TYPE_NORMAL)
 		heal(getSelf(), 3)
 	end
@@ -38,13 +38,13 @@ Attacks[3] = {
 	Description = "Tackles enemy",
 
 	Type = TYPE_GRASS,
-	TargetMode = TARGET_YES,
+	TargetCount = 1,
 
 	CanCast = function()
 		return 1
 	end,
 
-	Execute = function()
+	CheckTarget = function()
 		dealDamage(getOpponent(), 3, TYPE_GRASS)
 	end
 }
@@ -54,13 +54,13 @@ Attacks[4] = {
 	Description = "Tackles enemy",
 
 	Type = TYPE_GRASS,
-	TargetMode = TARGET_YES,
+	TargetCount = 1,
 
-	CanCast = function()
+	CheckTarget = function()
 		return 1
 	end,
 
-	Execute = function()
+	OnUse = function()
 		dealDamage(getOpponent(), 3, TYPE_GRASS)
 	end
 }

@@ -15,7 +15,7 @@ public:
 	int ID;
 	int Type;
 
-	int TargetMode;
+	int TargetCount;
 	std::string Description;
 
 	AttackData() {}

@@ -13,7 +13,7 @@ Attack::Attack(std::string name)
 		if (AttackDatabase[i].Name == name)
 		{
 			mID = AttackDatabase[i].ID;
-			mTargetMode = AttackDatabase[i].TargetMode;
+			mTargetCount = AttackDatabase[i].TargetCount;
 			mDescription = AttackDatabase[i].Description;
 			mType = AttackDatabase[i].Type;
 			mName = name;
@@ -29,6 +29,10 @@ Attack::~Attack()
 {
 }
 
-void Attack::use()
+void Attack::onCast()
 {
+	lua_getglobal(LuaAttacks, "Attacks");
+	lua_rawgeti(LuaAttacks, -1, mID + 1);
+	lua_getfield(LuaAttaks, -1, "OnUse");
+	lua_pcall(LuaAttacks, 0, 0, 0);
 }
