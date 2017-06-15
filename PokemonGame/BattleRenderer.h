@@ -25,6 +25,8 @@ public:
 	int mSelectedPokemonTrainer;
 	int mSelectedAbility;
 
+	int mTargetMap[13][13];
+
 	Button* mSideButtons[2][6];
 	Texture* mPokemonNames[2][6];
 	Texture* mPokemonStatText[2][6][STAT_NUM];
@@ -33,6 +35,8 @@ public:
 
 	Texture* mMoveTextures[2][6][4];
 	Button* mMoveButtons[2][6][4];
+	Texture* mSkipTexture;
+	Button* mSkipButton;
 
 	Timer mTimer;
 	int mSelectFrame;
@@ -40,6 +44,8 @@ public:
 	BattleRenderer();
 	BattleRenderer(Battle* battle);
 	~BattleRenderer();
+
+	void updateSprites();
 
 	void render(SDL_Surface* surface);
 	void update(Uint32 deltatime);

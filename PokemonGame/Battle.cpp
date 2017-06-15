@@ -71,7 +71,7 @@ bool Battle::attemptMove(int trainer, int num, int x, int y)
 {
 	Pokemon* p = getPokemon(trainer, num);
 
-	if (trainer != mTurn || p->mHasMoved == 1)
+	if (trainer != mTurn || p->mHasMoved == 1 || p->mIsDead == 1)
 	{
 		return false;
 	}
@@ -100,13 +100,39 @@ bool Battle::attemptMove(int trainer, int num, int x, int y)
 
 bool Battle::attemptAttack(int trainer, int num, int attack_id, int targetx, int targety)
 {
+	Pokemon* p = getPokemon(trainer, num);
+
+	if (mTurn != trainer || p->mHasAttacked == 1 || p->mIsDead == 1)
+	{
+		return false;
+	}
+
+	if (checkAttackTarget(trainer, num, attack_id, targetx, targety))
+	{
+		p->mAttacks[attack_id].onUse();
+		p->mHasAttacked = 1;
+		return true;
+	}
+
+	return false;
+}
+
+void Battle::forceAttack(int trainer, int num, int attack_id, int targetx, int targety)
+{
+	mAttackerID = getPokemonID(trainer, num);
+	mTargetX = targetx;
+	mTargetY = targety;
+	getPokemon(trainer, num)->mAttacks[attack_id].onUse();
+	getPokemon(trainer, num)->mHasAttacked = 1;
+}
+
+bool Battle::checkAttackTarget(int trainer, int num, int attack_id, int targetx, int targety)
+{
 	mAttackerID = getPokemonID(trainer, num);
 	mTargetX = targetx;
 	mTargetY = targety;
 
-	getPokemon(trainer, num)->mAttacks[attack_id].onUse();
-
-	return true;
+	return getPokemon(trainer, num)->mAttacks[attack_id].checkTarget();
 }
 
 void Battle::checkTurn()
@@ -123,9 +149,14 @@ void Battle::checkTurn()
 	}
 	if (flag == 0)
 	{
-		mTurn = (mTurn + 1) % 2;
-		resetPokemon();
+		endTurn();
 	}
+}
+
+void Battle::endTurn()
+{
+	mTurn = (mTurn + 1) % 2;
+	resetPokemon();
 }
 
 void Battle::checkDead()

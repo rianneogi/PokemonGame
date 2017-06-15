@@ -38,3 +38,14 @@ void Attack::onUse()
 	lua_pcall(LuaAttacks, 0, 0, 0);
 	lua_pop(LuaAttacks, 3);
 }
+
+bool Attack::checkTarget()
+{
+	lua_getglobal(LuaAttacks, "Attacks");
+	lua_rawgeti(LuaAttacks, -1, mID + 1);
+	lua_getfield(LuaAttacks, -1, "CheckTarget");
+	lua_pcall(LuaAttacks, 0, 1, 0);
+	int r = lua_tointeger(LuaAttacks, -1);
+	lua_pop(LuaAttacks, 4);
+	return r;
+}

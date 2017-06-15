@@ -17,4 +17,5 @@ public:
 	~Attack();
 
 	void onUse();
+	bool checkTarget();
 };

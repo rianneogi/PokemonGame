@@ -19,6 +19,10 @@ TYPE_FAIRY = 17
 
 Attacks = {}
 
+getDistance = function(x1,y1,x2,y2)
+	return math.max(math.abs(x1-x2), math.abs(y1-y2))
+end
+
 Attacks[1] = {
 	Name = "Tackle",
 	Description = "Tackles enemy",
@@ -27,7 +31,13 @@ Attacks[1] = {
 	TargetCount = 1,
 
 	CheckTarget = function()
-		return 1
+		tx,ty = getAttackTarget()
+		ax,ay = getPokemonPos(getAttacker())
+		if(getDistance(tx,ty,ax,ay)<=2) then
+			return 1
+		else
+			return 0
+		end
 	end,
 
 	OnUse = function()
@@ -46,7 +56,13 @@ Attacks[2] = {
 	TargetCount = 1,
 
 	CheckTarget = function()
-		return 1
+		tx,ty = getAttackTarget()
+		ax,ay = getPokemonPos(getAttacker())
+		if(getDistance(tx,ty,ax,ay)<=2) then
+			return 1
+		else
+			return 0
+		end
 	end,
 
 	OnUse = function()
@@ -65,7 +81,13 @@ Attacks[3] = {
 	TargetCount = 1,
 
 	CheckTarget = function()
-		return 1
+		tx,ty = getAttackTarget()
+		ax,ay = getPokemonPos(getAttacker())
+		if(getDistance(tx,ty,ax,ay)<=3) then
+			return 1
+		else
+			return 0
+		end
 	end,
 
 	OnUse = function()
@@ -84,7 +106,13 @@ Attacks[4] = {
 	TargetCount = 1,
 
 	CheckTarget = function()
-		return 1
+		tx,ty = getAttackTarget()
+		ax,ay = getPokemonPos(getAttacker())
+		if(getDistance(tx,ty,ax,ay)<=4) then
+			return 1
+		else
+			return 0
+		end
 	end,
 
 	OnUse = function()

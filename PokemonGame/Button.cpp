@@ -1,6 +1,6 @@
 #include "Button.h"
 
-Button::Button(Texture* tex, SDL_Rect r, SDL_Rect clip) : mRect(r), mTexture(tex), mCurrentFrame(0)
+Button::Button(Texture* tex, SDL_Rect r, SDL_Rect clip) : mRect(r), mTexture(tex), mCurrentFrame(0), mFrameInterval(0)
 {
 	mClip.push_back(clip);
 }
@@ -28,7 +28,7 @@ bool Button::checkCollision(int mouseX, int mouseY)
 
 void Button::render()
 {
-	if (mTimer.getElaspedTime() >= mFrameInterval)
+	if (mFrameInterval != 0 && mTimer.getElaspedTime() >= mFrameInterval)
 	{
 		mCurrentFrame = (mCurrentFrame + 1) % mClip.size();
 		mTimer.restart();

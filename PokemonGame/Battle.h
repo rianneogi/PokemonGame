@@ -28,8 +28,11 @@ public:
 
 	bool attemptMove(int trainer, int num, int x, int y);
 	bool attemptAttack(int trainer, int num, int attack_id, int targetx, int targety);
+	void forceAttack(int trainer, int num, int attack_id, int targetx, int targety);
+	bool checkAttackTarget(int trainer, int num, int attack_id, int targetx, int targety);
 
 	void checkTurn();
+	void endTurn();
 	void checkDead();
 	void resetPokemon();
 };

@@ -21,6 +21,11 @@ BattleRenderer::BattleRenderer(Battle* battle) : mBattle(battle)
 	mTypeTexture = new Texture("Graphics/typesheet.png");
 	mHPText = new Texture(gFontSmall, "HP: ", createSDLColor(255, 255, 255));
 
+	mSkipTexture = new Texture(gFont, "End Turn", createSDLColor(255, 255, 255));
+	mSkipButton = new Button(mSkipTexture, 
+		createSDLRect(200, 439 + 20 * 8, mSkipTexture->mWidth, mSkipTexture->mHeight),
+		createSDLRect(0, 0, mSkipTexture->mWidth, mSkipTexture->mHeight));
+
 	mSelectedPokemonTrainer = -1;
 	mSelectedPokemonNum = -1;
 	mSelectedAbility = -1;
@@ -35,12 +40,11 @@ BattleRenderer::BattleRenderer(Battle* battle) : mBattle(battle)
 		for (int j = 0; j < 6; j++)
 		{
 			Pokemon* p = mBattle->mTrainers[i]->mPokemon[j];
-			r = createSDLRect(425, 35 * j + 250 * i, 32, 32);
 
 			v.clear();
 			v.push_back(createSDLRect(296 + ((p->mSpecies) % 3) * 328, 24 + ((p->mSpecies) / 3) * 72, 32, 32));
 			v.push_back(createSDLRect(296 + ((p->mSpecies) % 3) * 328, 32 + 24 + ((p->mSpecies) / 3) * 72, 32, 32));
-			mSideButtons[i][j] = new Button(mPokemonSide, r, v, 250);
+			mSideButtons[i][j] = new Button(mPokemonSide, createSDLRect(425, 35 * j + 250 * i, 32, 32), v, 250);
 		}
 	}
 
@@ -66,6 +70,8 @@ BattleRenderer::BattleRenderer(Battle* battle) : mBattle(battle)
 			}
 		}
 	}
+
+	updateSprites();
 }
 
 BattleRenderer::~BattleRenderer()
@@ -73,7 +79,13 @@ BattleRenderer::~BattleRenderer()
 	delete mTilesetTexture;
 	delete mPokemonMap;
 	delete mPokemonSelect;
+	delete mPokemonSelect2;
 	delete mPokemonSide;
+	delete mHPText;
+	delete mTypeTexture;
+
+	delete mSkipTexture;
+	delete mSkipButton;
 
 	for (int i = 0; i < 2; i++)
 	{
@@ -81,6 +93,7 @@ BattleRenderer::~BattleRenderer()
 		{
 			delete mSideButtons[i][j];
 			delete mPokemonNames[i][j];
+			delete mPokemonLvlText[i][j];
 
 			for (int k = 0; k < STAT_NUM; k++)
 			{
@@ -90,8 +103,35 @@ BattleRenderer::~BattleRenderer()
 	}
 }
 
+void BattleRenderer::updateSprites()
+{
+	for (int i = 0; i < 2; i++)
+	{
+		for (int j = 0; j < 6; j++)
+		{
+			Pokemon* p = mBattle->getPokemon(i, j);
+
+			std::string hp_string = "HP:" + std::to_string(int(p->mCurrentHP)) + "/" + std::to_string(int(p->mStats[STAT_HP]));
+			mPokemonStatText[i][j][STAT_HP]->loadFromText(gFontSmall, hp_string, createSDLColor(255, 255, 255));
+
+			for (int k = 1; k < STAT_NUM; k++)
+			{
+				std::string stat_string = gStatNames[k];
+				for (int x = 0; x < 6 - gStatNames[k].length(); x++)
+				{
+					stat_string += " ";
+				}
+				stat_string += ": " + std::to_string(int(p->mStats[k]));
+				mPokemonStatText[i][j][k]->loadFromText(gFontSmall, stat_string, createSDLColor(255, 255, 255));
+			}
+		}
+	}
+}
+
 void BattleRenderer::render(SDL_Surface* surface)
 {
+	mSkipButton->render();
+
 	SDL_Rect r;
 	r.x = 0;
 	r.y = 0;
@@ -151,8 +191,6 @@ void BattleRenderer::render(SDL_Surface* surface)
 			mPokemonNames[i][j]->render(460, 35 * j + 250 * i);
 			
 			//HP
-			std::string hp_string = "HP:" + std::to_string(int(p->mCurrentHP)) + "/" + std::to_string(int(p->mStats[STAT_HP]));
-			mPokemonStatText[i][j][STAT_HP]->loadFromText(gFontSmall, hp_string, createSDLColor(255, 255, 255));
 			mPokemonStatText[i][j][STAT_HP]->render(515, 35 * j + 250 * i + 15);
 
 			//Lvl
@@ -202,13 +240,6 @@ void BattleRenderer::render(SDL_Surface* surface)
 		//Other Stats
 		for (int i = 1; i < STAT_NUM; i++)
 		{
-			std::string stat_string = gStatNames[i];
-			for (int j = 0; j < 6-gStatNames[i].length(); j++)
-			{
-				stat_string += " ";
-			}
-			stat_string += ": " + std::to_string(int(p->mStats[i]));
-			mPokemonStatText[mSelectedPokemonTrainer][mSelectedPokemonNum][i]->loadFromText(gFontSmall, stat_string, createSDLColor(255, 255, 255));
 			mPokemonStatText[mSelectedPokemonTrainer][mSelectedPokemonNum][i]->render(200, 439 + 20*i);
 		}
 
@@ -233,11 +264,18 @@ void BattleRenderer::handleEvent(SDL_Event e)
 {
 	if (e.type == SDL_MOUSEBUTTONDOWN)
 	{
+		//End Turn
+		if (mSkipButton->checkCollision(e.button.x, e.button.y))
+		{
+			mBattle->endTurn();
+			updateSprites();
+		}
+
 		for (int i = 0; i < 2; i++)
 		{
 			for (int j = 0; j < 6; j++)
 			{
-				if (mSideButtons[i][j]->checkCollision(e.button.x, e.button.y))
+				if (mSideButtons[i][j]->checkCollision(e.button.x, e.button.y)) //Select pokemon from side menu
 				{
 					mSelectedPokemonTrainer = i;
 					mSelectedPokemonNum = j;
@@ -255,8 +293,13 @@ void BattleRenderer::handleEvent(SDL_Event e)
 
 			if (mSelectedAbility != -1) //Attack
 			{
-				mBattle->attemptAttack(mSelectedPokemonTrainer, mSelectedPokemonNum, mSelectedAbility, tx, ty);
-				printf("%d %d attacked %d %d with %d!\n", mSelectedPokemonTrainer, mSelectedPokemonNum, tx, ty, mSelectedAbility);
+				if (mBattle->attemptAttack(mSelectedPokemonTrainer, mSelectedPokemonNum, mSelectedAbility, tx, ty))
+				{
+					printf("%d %d attacked %d %d with %d!\n", mSelectedPokemonTrainer, mSelectedPokemonNum, tx, ty, mSelectedAbility);
+					updateSprites();
+				}
+				else
+					printf("attacked failed\n");
 				mSelectedAbility = -1;
 			}
 			else
@@ -266,7 +309,7 @@ void BattleRenderer::handleEvent(SDL_Event e)
 				{
 					for (int j = 0; j < 6; j++)
 					{
-						if (mBattle->getPokemon(i, j)->mX == tx && mBattle->getPokemon(i, j)->mY == ty) //Select on board
+						if (mBattle->getPokemon(i, j)->mX == tx && mBattle->getPokemon(i, j)->mY == ty) //Select pokemon from board
 						{
 							mSelectedPokemonNum = j;
 							mSelectedPokemonTrainer = i;
@@ -280,7 +323,8 @@ void BattleRenderer::handleEvent(SDL_Event e)
 
 				if (flag == 0 && mSelectedPokemonNum != -1) //Move
 				{
-					mBattle->attemptMove(mSelectedPokemonTrainer, mSelectedPokemonNum, tx, ty);
+					if(mBattle->attemptMove(mSelectedPokemonTrainer, mSelectedPokemonNum, tx, ty))
+						updateSprites();
 				}
 			}
 		}
@@ -289,9 +333,25 @@ void BattleRenderer::handleEvent(SDL_Event e)
 		{
 			for (int i = 0; i < 4; i++)
 			{
+				//Select Attack
 				if (mMoveButtons[mSelectedPokemonTrainer][mSelectedPokemonNum][i]->checkCollision(e.button.x, e.button.y))
 				{
 					mSelectedAbility = i;
+
+					for (int j = 0; j < 13; j++)
+					{
+						for (int k = 0; k < 13; k++)
+						{
+							if (mBattle->checkAttackTarget(mSelectedPokemonTrainer, mSelectedPokemonNum, i, j, k))
+							{
+								mTargetMap[j][k] = 1;
+							}
+							else
+							{
+								mTargetMap[j][k] = 0;
+							}
+						}
+					}
 				}
 			}
 		}
