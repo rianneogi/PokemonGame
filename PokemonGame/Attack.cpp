@@ -46,6 +46,6 @@ bool Attack::checkTarget()
 	lua_getfield(LuaAttacks, -1, "CheckTarget");
 	lua_pcall(LuaAttacks, 0, 1, 0);
 	int r = lua_tointeger(LuaAttacks, -1);
-	lua_pop(LuaAttacks, 4);
+	lua_pop(LuaAttacks, 3);
 	return r;
 }

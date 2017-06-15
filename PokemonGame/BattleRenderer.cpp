@@ -133,6 +133,8 @@ void BattleRenderer::updateSprites()
 
 void BattleRenderer::render(SDL_Surface* surface)
 {
+	printf("stack size attacks: %d\n", lua_gettop(LuaAttacks));
+	printf("stack size pokemon: %d\n", lua_gettop(LuaPokemon));
 	mSkipButton->render();
 
 	SDL_Rect r;
@@ -341,7 +343,7 @@ void BattleRenderer::handleEvent(SDL_Event e)
 				{
 					mSelectedAbility = i;
 
-					/*for (int j = 0; j < 13; j++)
+					for (int j = 0; j < 13; j++)
 					{
 						for (int k = 0; k < 13; k++)
 						{
@@ -355,7 +357,7 @@ void BattleRenderer::handleEvent(SDL_Event e)
 								mTargetMap[j][k] = 0;
 							}
 						}
-					}*/
+					}
 					//mDebug = 1;
 				}
 			}
