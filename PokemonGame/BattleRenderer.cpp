@@ -12,6 +12,8 @@ BattleRenderer::BattleRenderer() : mBattle(NULL)
 
 BattleRenderer::BattleRenderer(Battle* battle) : mBattle(battle)
 {
+	mDebug = 0;
+
 	mTilesetTexture = new Texture("Graphics/Tilesets/Outside_A2.png");
 
 	mPokemonMap = new Texture("Game Data/Sprites/HeartGoldSoulSilver/Kanto-Pokemon.png", 160, 176, 128);
@@ -22,8 +24,9 @@ BattleRenderer::BattleRenderer(Battle* battle) : mBattle(battle)
 	mHPText = new Texture(gFontSmall, "HP: ", createSDLColor(255, 255, 255));
 
 	mSkipTexture = new Texture(gFont, "End Turn", createSDLColor(255, 255, 255));
+	printf("sk, %d %d\n", mSkipTexture->mWidth, mSkipTexture->mHeight);
 	mSkipButton = new Button(mSkipTexture, 
-		createSDLRect(200, 439 + 20 * 8, mSkipTexture->mWidth, mSkipTexture->mHeight),
+		createSDLRect(425, 35 * 1 + 250 * 2, mSkipTexture->mWidth, mSkipTexture->mHeight),
 		createSDLRect(0, 0, mSkipTexture->mWidth, mSkipTexture->mHeight));
 
 	mSelectedPokemonTrainer = -1;
@@ -144,7 +147,7 @@ void BattleRenderer::render(SDL_Surface* surface)
 			mTilesetTexture->render(i * 32, j * 32, &r);
 		}
 	}
-
+	
 	for (int i = 0; i < 2; i++)
 	{
 		for (int j = 0; j < mBattle->mTrainers[i]->mPokemon.size(); j++)
@@ -338,10 +341,11 @@ void BattleRenderer::handleEvent(SDL_Event e)
 				{
 					mSelectedAbility = i;
 
-					for (int j = 0; j < 13; j++)
+					/*for (int j = 0; j < 13; j++)
 					{
 						for (int k = 0; k < 13; k++)
 						{
+							printf("check target %d %d %d %d %d\n", mSelectedPokemonTrainer, mSelectedPokemonNum, i, j, k);
 							if (mBattle->checkAttackTarget(mSelectedPokemonTrainer, mSelectedPokemonNum, i, j, k))
 							{
 								mTargetMap[j][k] = 1;
@@ -351,7 +355,8 @@ void BattleRenderer::handleEvent(SDL_Event e)
 								mTargetMap[j][k] = 0;
 							}
 						}
-					}
+					}*/
+					//mDebug = 1;
 				}
 			}
 		}

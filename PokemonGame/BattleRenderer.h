@@ -21,6 +21,8 @@ public:
 	Texture* mPokemonSelect2;
 	Texture* mTypeTexture;
 
+	int mDebug;
+
 	int mSelectedPokemonNum;
 	int mSelectedPokemonTrainer;
 	int mSelectedAbility;

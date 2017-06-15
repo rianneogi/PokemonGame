@@ -149,7 +149,7 @@ int initPokemon()
 			AttackLearn atk(attack_name, learn_lvl);
 			d.AttacksLearnt.push_back(atk);
 
-			printf("	has ability: %s %d\n", attack_name, learn_lvl);
+			//printf("	has ability: %s %d\n", attack_name, learn_lvl);
 
 			lua_pop(LuaPokemon, 1);
 		}
